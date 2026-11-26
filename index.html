@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Mind Before the Moment</title>
+<title>Prototype Next-in-Line</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
@@ -14,7 +14,7 @@
    COLOUR white ground with soft pastel fields (peach, mint, sky, lilac) under frosted glass; coral = pra-tampil, sky blue = pasca-tampil, butter = spotlight
    TYPE Plus Jakarta Sans 800 display + Plus Jakarta Sans text
    LAYOUT laptop: text left, animation right, story controls pinned at the bottom; phone: title, animation, text, controls */
-:root{color-scheme:light;--ink:#23253a;--mut:#5d6180;--line:rgba(35,37,58,.12);--glass:rgba(255,255,255,.66);--edge:rgba(255,255,255,.9);--peach:#ffd8c9;--mint:#ccf0e1;--sky:#d4e5ff;--butter:#fff1b8;--lilac:#e6dcff;--rose:#ffdcea;--pra:#f2643f;--pasca:#3b8de8;--praT:#b83d1f;--pascaT:#1d5fae;--spot:#ffd860;--ok:#167f55;--bad:#cc3350;--grad:linear-gradient(115deg,#ffc8b4,#ffd5e6 48%,#d8cfff)}
+:root{color-scheme:light;--ease:cubic-bezier(.22,1,.36,1);--gBlue:linear-gradient(120deg,#2448b8 0%,#3168d6 55%,#4a92ea 100%);--gCoral:linear-gradient(120deg,#c83a22 0%,#e45a39 55%,#f2845a 100%);--gViolet:linear-gradient(120deg,#4334b8 0%,#6450dc 55%,#8a73f0 100%);--gTeal:linear-gradient(120deg,#0f7466 0%,#169682 55%,#2fb99d 100%);--gBrand:linear-gradient(120deg,#2a4cc0 0%,#5a52da 52%,#8a63e8 100%);--ink:#23253a;--mut:#5d6180;--line:rgba(35,37,58,.12);--glass:rgba(255,255,255,.66);--edge:rgba(255,255,255,.9);--peach:#ffd8c9;--mint:#ccf0e1;--sky:#d4e5ff;--butter:#fff1b8;--lilac:#e6dcff;--rose:#ffdcea;--pra:#f2643f;--pasca:#3b8de8;--praT:#b83d1f;--pascaT:#1d5fae;--spot:#ffd860;--ok:#167f55;--bad:#cc3350;--grad:linear-gradient(115deg,#ffb79f,#ffc4dd 48%,#c6b9ff)}
 *{box-sizing:border-box;min-width:0}
 html{scroll-padding-top:90px}
 body{margin:0;background:#fff;color:var(--ink);font:17px/1.6 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip}
@@ -23,24 +23,27 @@ p{margin:0 0 12px}
 a{color:inherit}
 .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:#fff}
 .bg i{position:absolute;width:62vmax;height:62vmax;border-radius:50%}
-.bg .b1{left:-20vmax;top:-22vmax;background:radial-gradient(closest-side,rgba(255,206,188,.95),rgba(255,206,188,0))}
-.bg .b2{right:-22vmax;top:-12vmax;background:radial-gradient(closest-side,rgba(219,208,255,.9),rgba(219,208,255,0))}
-.bg .b3{left:6vmax;bottom:-30vmax;background:radial-gradient(closest-side,rgba(198,239,221,.9),rgba(198,239,221,0))}
-.bg .b4{right:-12vmax;bottom:-28vmax;background:radial-gradient(closest-side,rgba(204,225,255,.95),rgba(204,225,255,0))}
+.bg .b1{left:-20vmax;top:-22vmax;background:radial-gradient(closest-side,rgba(255,176,150,.9),rgba(255,176,150,0))}
+.bg .b2{right:-22vmax;top:-12vmax;background:radial-gradient(closest-side,rgba(178,160,255,.82),rgba(178,160,255,0))}
+.bg .b3{left:6vmax;bottom:-30vmax;background:radial-gradient(closest-side,rgba(140,222,192,.75),rgba(140,222,192,0))}
+.bg .b4{right:-12vmax;bottom:-28vmax;background:radial-gradient(closest-side,rgba(150,196,255,.85),rgba(150,196,255,0))}
 @media(min-width:900px) and (prefers-reduced-motion:no-preference){.bg i{animation:drift 28s ease-in-out infinite alternate}.bg .b2{animation-duration:34s}.bg .b3{animation-duration:31s}.bg .b4{animation-duration:38s}}
 @keyframes drift{to{transform:translate(5vmax,4vmax) scale(1.06)}}
 .glass{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--edge);border-radius:26px;box-shadow:0 1px 0 #fff inset,0 10px 30px rgba(60,70,120,.07)}
 .top{position:sticky;top:0;z-index:10;padding:10px max(4vw,16px);background:rgba(255,255,255,.58);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid rgba(35,37,58,.06)}
 .topin{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;font-size:16px;border:0;background:none;padding:0;cursor:pointer;color:var(--ink);font-family:inherit}
-.logo{width:30px;height:30px;border-radius:50%;flex:none;background:conic-gradient(from 200deg,#ffb59c,#ffd6e6,#cfc3ff,#bfe0ff,#c5f0dd,#ffb59c);box-shadow:inset 0 0 0 5px rgba(255,255,255,.65)}
+.logo{width:30px;height:30px;border-radius:50%;flex:none;background:conic-gradient(from 200deg,#f2845a,#e86aa8,#6450dc,#3168d6,#2fb99d,#f2845a);box-shadow:inset 0 0 0 5px rgba(255,255,255,.55)}
 .seg{display:inline-flex;padding:4px;border-radius:999px;background:rgba(255,255,255,.75);border:1px solid var(--line)}
 .seg button{min-height:44px;padding:0 18px;border:0;border-radius:999px;background:transparent;font:inherit;font-size:15px;font-weight:700;color:var(--mut);cursor:pointer}
-.seg button.on{background:var(--grad);color:var(--ink)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.85);color:var(--ink);font:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:transform .15s,background .15s;text-decoration:none}
+.seg button.on{background:var(--gBrand);color:#fff;box-shadow:0 6px 16px -6px rgba(70,70,210,.6)}
+.seg button{transition:background .3s var(--ease),color .3s}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 20px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.85);color:var(--ink);font:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:transform .35s var(--ease),background .25s,box-shadow .35s var(--ease);text-decoration:none}
 .btn:hover{background:#fff;transform:translateY(-1px)}
-.btn.pri{border-color:transparent;background:var(--grad);box-shadow:0 6px 18px rgba(242,100,63,.16)}
-.btn.pri:hover{background:linear-gradient(115deg,#ffbaa3,#ffc9de 48%,#cdc2ff)}
+.btn.pri{border-color:transparent;background:var(--gBrand);color:#fff;box-shadow:0 12px 26px -10px rgba(70,70,210,.65)}
+.btn.pri::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.38) 50%,transparent 70%);transform:translateX(-130%);transition:transform .9s var(--ease)}
+.btn.pri:hover::after{transform:translateX(130%)}
+.btn.pri:hover{background:var(--gBrand);box-shadow:0 16px 30px -10px rgba(70,70,210,.75)}
 .btn.big{min-height:54px;padding:0 28px;font-size:17px}
 .btn.sm{min-height:44px;padding:0 14px;font-size:14px}
 .btn.armed{background:#ffe1e6;border-color:var(--bad);color:#8c1d33}
@@ -59,11 +62,109 @@ textarea{font-size:14px}
 .scene{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-areas:"head art" "body art";column-gap:clamp(24px,4vw,60px);align-items:start}
 .sh{grid-area:head;align-self:end}
 .sb{grid-area:body}
-.art{grid-area:art;align-self:center;position:relative;margin:0;padding:22px 18px 18px;max-width:600px;width:100%;justify-self:center}
+.art{grid-area:art;align-self:center;position:relative;margin:0;padding:22px 18px 18px;max-width:600px;width:100%;justify-self:center;background:linear-gradient(160deg,rgba(255,255,255,.86),rgba(255,255,255,.62) 55%,rgba(var(--rc,100,80,220),.1));box-shadow:0 1px 0 #fff inset,0 0 0 1.5px rgba(var(--rc,100,80,220),.18),0 30px 60px -28px rgba(var(--rc,100,80,220),.6)}
 @media(max-width:860px){.scene{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "art" "body";row-gap:18px}.art{padding:16px 12px 12px}}
-.kick{display:inline-block;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.8);border:1px solid var(--edge);font-size:14px;font-weight:700;color:var(--mut);margin-bottom:14px}
+.kick{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 6px;border-radius:999px;color:#fff;margin-bottom:16px;box-shadow:0 12px 26px -12px rgba(var(--kc,49,104,214),.8),inset 0 1px 0 rgba(255,255,255,.3)}
+.kick .kn{display:grid;place-items:center;min-width:36px;height:30px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.24);font-weight:800;font-size:14px;font-variant-numeric:tabular-nums}
+.kick .kl{padding:5px 12px;border-radius:999px;background:rgba(12,18,60,.26);border:1px solid rgba(255,255,255,.18);font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.kick .kd{width:8px;height:8px;border-radius:50%;background:#fff;animation:kdot 2.4s var(--ease) infinite}
+.g-blue{background:var(--gBlue);--kc:49,104,214}
+.g-coral{background:var(--gCoral);--kc:228,90,57}
+.g-violet{background:var(--gViolet);--kc:100,80,220}
+.g-teal{background:var(--gTeal);--kc:22,150,130}
+.g-glass{background:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
+@keyframes kdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.65)}}
+.hook{animation:hookIn 1.1s var(--ease) .15s both}
+@keyframes hookIn{0%{opacity:0;filter:blur(16px);transform:scale(1.05)}60%{filter:blur(0)}}
+.hook .hm{padding:0 .1em;margin:0 -.03em;border-radius:.2em;background-repeat:no-repeat;background-position:0 88%;background-size:0% 62%;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:mark .7s var(--ease) var(--md,1s) both}
+.hm1{background-image:linear-gradient(100deg,#ffc4ae,#ffb3cf)}
+.hm2{background-image:linear-gradient(100deg,#c4dcff,#d9cdff)}
+@keyframes mark{to{background-size:100% 62%}}
+.hook .hl{display:inline-block;background:linear-gradient(100deg,#e4532f,#c4489c 25%,#6450dc 50%,#c4489c 75%,#e4532f);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.06em;animation:hlPop 1.1s ease-out 1.6s both,shine 4s linear 2.5s infinite}
+@keyframes hlPop{0%{opacity:0;filter:blur(6px)}}
+@keyframes shine{to{background-position:-200% 0}}
+.cue{display:inline-flex;align-items:center;gap:10px;margin:4px 0 0;padding:12px 20px;border-radius:999px;background:var(--gBrand);color:#fff;font-weight:700;font-size:17px;box-shadow:0 14px 28px -12px rgba(70,70,210,.7)}
+.cue .arr{display:inline-block;animation:nudge 1.4s var(--ease) infinite}
+@keyframes nudge{50%{transform:translateX(6px)}}
+.scene.out-n{animation:outN .3s var(--ease) both}
+.scene.out-p{animation:outP .3s var(--ease) both}
+@keyframes outN{to{opacity:0;transform:translateX(-36px)}}
+@keyframes outP{to{opacity:0;transform:translateX(36px)}}
+@keyframes enter{from{opacity:0;transform:translate(var(--dirx,0px),16px)}}
+.bob{transform-box:fill-box;transform-origin:center;animation:bob 4.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.talk{position:absolute;top:9px;right:9px;display:flex;gap:3px;align-items:flex-end;height:16px}
+.talk i{display:block;width:4px;height:16px;border-radius:2px;background:#e8a400;transform-origin:center bottom;animation:eq .9s ease-in-out infinite}
+.talk i:nth-child(2){animation-delay:-.3s}.talk i:nth-child(3){animation-delay:-.6s}
+@keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+#bVoice svg{width:20px;height:20px}
+#bVoice .w1,#bVoice .w2{transition:opacity .3s}
+#bVoice.off{color:var(--mut)}
+#bVoice.off .w1,#bVoice.off .w2{opacity:0}
+#bVoice.talking .w1{animation:wv 1.1s ease-in-out infinite}
+#bVoice.talking .w2{animation:wv 1.1s ease-in-out .25s infinite}
+@keyframes wv{50%{opacity:.2}}
+.gate{min-height:calc(100svh - 130px);display:grid;align-items:center;padding:20px 0 48px}
+.gwrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:clamp(28px,5vw,72px);align-items:center}
+@media(max-width:860px){.gwrap{grid-template-columns:minmax(0,1fr)}.gvis{max-width:460px;width:100%;justify-self:center}}
+.gtext>*{animation:enter 1s var(--ease) both}
+.gtext h1{font-size:clamp(40px,5.2vw,64px);line-height:1.03;letter-spacing:-.035em;margin:0 0 16px;text-wrap:balance;animation-delay:.08s}
+.gt{background:linear-gradient(100deg,#e4532f,#c4489c 50%,#6450dc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.gtext p{font-size:18px;color:#3d405b;max-width:46ch;margin:0 0 24px;animation-delay:.16s}
+.gtext .row{animation:none}
+.gtext .btn svg{flex:none}
+.glink2{border:0;background:none;padding:0;margin-top:10px;font:inherit;font-size:15px;font-weight:700;color:var(--mut);text-decoration:underline;text-underline-offset:4px;cursor:pointer;min-height:44px}
+.gvis{position:relative;overflow:hidden;border-radius:30px;padding:22px 20px 20px;color:#fff;background:linear-gradient(135deg,#2448b8 0%,#4a5fe0 45%,#7c5ff0 78%,#b863d8 100%);box-shadow:0 34px 70px -32px rgba(60,70,200,.65),inset 0 1px 0 rgba(255,255,255,.35);animation:enter 1s var(--ease) .2s both}
+.gvis>*{position:relative}
+.gvis .orb{width:240px;height:240px}
+.gvis .o1{left:-70px;top:-80px}
+.gvis .o2{right:-60px;bottom:-90px}
+.ghead{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.16);font-size:13px;font-weight:700}
+.gdot{width:8px;height:8px;border-radius:50%;background:#ff8f8f;animation:blink 1.4s steps(1) infinite}
+.gq{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:54px 0 0}
+.gspot{position:absolute!important;z-index:0;top:-8px;bottom:-8px;left:0;width:calc((100% - 32px) / 5);border-radius:20px;background:radial-gradient(closest-side,rgba(255,226,122,.7),rgba(255,226,122,0));animation:spotMove 7s var(--ease) infinite}
+@keyframes spotMove{0%{opacity:0;transform:translateX(0)}5%,14%{opacity:1;transform:translateX(0)}22%,34%{opacity:1;transform:translateX(calc(100% + 8px))}42%,54%{opacity:1;transform:translateX(calc(200% + 16px))}62%,74%{opacity:1;transform:translateX(calc(300% + 24px))}84%,100%{opacity:0;transform:translateX(calc(300% + 24px))}}
+.gs{position:relative;z-index:1;display:grid;justify-items:center;gap:6px;padding:10px 4px 12px;border-radius:18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24)}
+.gs svg{width:100%;max-width:52px;height:auto;border-radius:50%;box-shadow:0 0 0 3px rgba(255,255,255,.85)}
+.gs b{display:grid;font-size:13px;line-height:1.2}
+.gs b>span{grid-area:1/1;text-align:center}
+.gs small{font-size:13px;opacity:.85}
+.gs.you{background:#fff;color:var(--ink);border-color:#fff}
+.gs.you small{color:var(--praT);opacity:1;font-weight:800}
+.nmLoop{animation:nmLoop 7s ease-in-out infinite}
+.qLoop{opacity:0;animation:qLoop 7s ease-in-out infinite}
+@keyframes nmLoop{0%,72%{opacity:1}80%,94%{opacity:0}100%{opacity:1}}
+@keyframes qLoop{0%,72%{opacity:0}80%,94%{opacity:1}100%{opacity:0}}
+.gthink{position:absolute!important;z-index:2;right:0;top:-46px;display:flex;gap:5px;align-items:center;padding:9px 13px;border-radius:16px 16px 4px 16px;background:#fff;box-shadow:0 8px 20px rgba(20,20,80,.25)}
+.gthink i{width:7px;height:7px;border-radius:50%;background:#6450dc;animation:dots 1.2s ease-in-out infinite}
+.gthink i:nth-child(2){animation-delay:.15s}.gthink i:nth-child(3){animation-delay:.3s}
+@keyframes dots{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-3px);opacity:1}}
+.gcap{margin:16px 0 0;font-size:15px;font-weight:600;opacity:.95}
+
+.gcard{position:relative;overflow:hidden;width:min(780px,100%);padding:clamp(30px,5vw,60px) clamp(20px,5vw,60px);border-radius:38px;color:#fff;text-align:center;display:grid;justify-items:center;gap:14px;background:linear-gradient(135deg,#2448b8 0%,#4a5fe0 42%,#7c5ff0 74%,#b863d8 100%);box-shadow:0 44px 90px -34px rgba(60,70,200,.6),inset 0 1px 0 rgba(255,255,255,.35)}
+.gcard>*{position:relative}
+.gcard h1{font-size:clamp(36px,5.6vw,62px);line-height:1.03;letter-spacing:-.03em;text-wrap:balance;animation:enter 1s var(--ease) .1s both}
+.gcard p{margin:0;font-size:18px;opacity:.92;max-width:36ch;animation:enter 1s var(--ease) .25s both}
+.gcard .kick{animation:enter 1s var(--ease) both;margin-bottom:4px}
+.orb{position:absolute!important;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.34),rgba(255,255,255,0));animation:orb 12s ease-in-out infinite alternate;pointer-events:none}
+.o1{width:340px;height:340px;left:-90px;top:-100px}
+.o2{width:280px;height:280px;right:-70px;bottom:-90px;animation-duration:15s!important}
+.o3{width:170px;height:170px;right:16%;top:8%;animation-duration:10s!important}
+@keyframes orb{to{transform:translate(34px,26px) scale(1.14)}}
+.gfaces{display:flex;justify-content:center;padding-left:12px;margin:6px 0 2px;animation:enter 1s var(--ease) .35s both}
+.gfaces svg{width:54px;height:54px;border-radius:50%;margin-left:-12px;box-shadow:0 0 0 3px rgba(255,255,255,.9);animation:bob 4.6s ease-in-out infinite}
+.gfaces svg:nth-child(2){animation-delay:-.9s}.gfaces svg:nth-child(3){animation-delay:-1.8s}.gfaces svg:nth-child(4){animation-delay:-2.7s}.gfaces svg:nth-child(5){animation-delay:-3.6s}
+.play{position:relative;width:96px;height:96px;border-radius:50%;border:0;background:#fff;color:#4a4fd6;display:grid;place-items:center;cursor:pointer;margin-top:10px;box-shadow:0 16px 34px -12px rgba(10,20,80,.55);transition:transform .4s var(--ease);animation:enter 1s var(--ease) .45s both}
+.play:hover{transform:scale(1.07)}
+.play svg{width:40px;height:40px;margin-left:6px;position:relative}
+.play .ring{position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,255,255,.75);animation:ringOut 2.4s var(--ease) infinite}
+.play .r2{animation-delay:1.2s}
+@keyframes ringOut{from{transform:scale(1);opacity:.9}to{transform:scale(1.75);opacity:0}}
+.gcard b{font-size:20px}
+.gsub{font-size:14px;opacity:.88}
+.glink{border:0;background:transparent;color:#fff;font:inherit;font-size:15px;font-weight:700;text-decoration:underline;text-underline-offset:4px;cursor:pointer;min-height:44px;opacity:.92}
 .sh h2{font-size:clamp(30px,3.5vw,44px);line-height:1.1;letter-spacing:-.025em;margin:0 0 14px;text-wrap:balance}
-.sh h2.hook{font-size:clamp(30px,4vw,50px);min-height:3.3em}
+.sh h2.hook{font-size:clamp(30px,4vw,50px);line-height:1.12}
 .caret{display:inline-block;width:3px;height:.85em;margin-left:4px;vertical-align:-.06em;background:var(--pra);border-radius:2px;animation:blink 1s steps(1) infinite}
 .sb{color:#383b56;max-width:58ch}
 .sb .ul{margin:0 0 12px;padding-left:20px}
@@ -76,20 +177,23 @@ textarea{font-size:14px}
 .dots{display:flex;gap:4px;align-items:center}
 .dots button{width:30px;height:44px;border:0;background:transparent;padding:0;display:grid;place-items:center;cursor:pointer}
 .dots button i{display:block;width:100%;height:6px;border-radius:3px;background:rgba(35,37,58,.12);transition:background .3s}
-.dots button.seen i{background:#d9d2f7}
-.dots button.on i{background:linear-gradient(90deg,#ffb39c,#c9bcff)}
+.dots button.seen i{background:#c3b8f5}
+.dots button.on i{background:var(--gBrand)}
+.dots button i{transition:background .4s var(--ease),transform .4s var(--ease)}
+.dots button.on i{transform:scaleY(1.35)}
 .count{display:none;font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
-@media(max-width:760px){.dots,.rl{display:none}.count{display:inline}.snav{justify-content:space-between;gap:8px}.snav .btn{padding:0 14px}}
+@media(max-width:760px){.dots,.rl{display:none}.count{display:inline}.snav{justify-content:space-between;gap:8px}.snav .btn{padding:0 14px;white-space:nowrap;min-width:46px}}
 /* scene art pieces */
 .zoom{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:6px 0 4px}
 .tile{position:relative;aspect-ratio:4/3;border-radius:18px;background:rgba(255,255,255,.78);border:1px solid var(--edge);display:grid;place-items:center}
-.tile>svg{width:54%;max-width:100px;height:auto;border-radius:50%}
+.tile>svg{width:54%;max-width:100px;height:auto;border-radius:50%;animation:bob 4.8s ease-in-out infinite}
+.tile:nth-child(2)>svg{animation-delay:-1.2s}.tile:nth-child(3)>svg{animation-delay:-2.4s}.tile:nth-child(4)>svg{animation-delay:-.6s}.tile:nth-child(5)>svg{animation-delay:-3s}.tile:nth-child(6)>svg{animation-delay:-1.8s}
 .tile .tag{position:absolute;left:6px;bottom:6px;display:grid;white-space:nowrap;font-size:13px;font-weight:700;padding:2px 9px;border-radius:999px;background:rgba(35,37,58,.75);color:#fff;line-height:1.5}
 .tag>span,.sayn>span{grid-area:1/1}
 .nmA{opacity:0}
 .tile.sp{box-shadow:0 0 0 3px var(--spot)}
 .tile.sp::after{content:"";position:absolute;inset:-3px;border-radius:21px;border:3px solid var(--spot);animation:halo 1.6s ease-in-out infinite}
-.tile.you{background:linear-gradient(160deg,rgba(255,216,201,.9),rgba(230,220,255,.9))}
+.tile.you{background:linear-gradient(150deg,#ffc6b2,#e4c7f0 55%,#c9bdff)}
 .tile.you .tag{background:var(--pra)}
 .say{position:absolute;right:1%;top:2%;z-index:3;max-width:31%;padding:8px 12px;border-radius:16px 16px 16px 4px;background:#fff;box-shadow:0 8px 20px rgba(60,70,120,.12);font-size:14px;font-weight:600;line-height:1.35}
 .sayn{display:grid}
@@ -143,12 +247,12 @@ textarea{font-size:14px}
 .rec i{width:10px;height:10px;border-radius:50%;background:var(--bad);animation:blink 1.2s steps(1) infinite}
 .flow{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .flow li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:12px;align-items:start;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.76);border:1px solid var(--edge)}
-.flow .nd{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--grad)}
+.flow .nd{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--gBrand);color:#fff}
 .flow b{display:block;font-size:16px;line-height:1.3}
 .flow span span{display:block;font-size:14px;color:var(--mut);line-height:1.4}
 .hy{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.72);border:1px solid var(--edge);margin-bottom:10px}
 .hy b{display:grid;place-items:center;height:36px;border-radius:12px;background:#eef0f6;font-size:16px}
-.hy.h1 b{background:var(--grad)}
+.hy.h1 b{background:var(--gBrand);color:#fff}
 .vars{display:grid;gap:8px;margin-top:4px}
 .var{padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.72);border:1px solid var(--edge);font-size:15px}
 .var b{display:block;font-size:13px;color:var(--mut)}
@@ -162,7 +266,7 @@ textarea{font-size:14px}
 .spark{position:absolute;font-size:22px;color:#c3b4ff;animation:twinkle 2.4s ease-in-out infinite}
 .spark.s1{top:-14px;left:6%}.spark.s2{top:40%;right:-6px;color:#ffb39c;animation-delay:.8s}.spark.s3{bottom:-16px;left:46%;color:#8fd8b8;animation-delay:1.6s}
 /* animation kit: default styles are the final state */
-.a{animation-name:var(--k,up);animation-duration:var(--d,.7s);animation-delay:var(--t,0s);animation-timing-function:cubic-bezier(.2,.8,.2,1);animation-fill-mode:both;transform-box:fill-box;transform-origin:center}
+.a{animation-name:var(--k,up);animation-duration:var(--d,.9s);animation-delay:var(--t,0s);animation-timing-function:var(--ease);animation-fill-mode:both;transform-box:fill-box;transform-origin:center}
 .ob{transform-origin:center bottom}
 .ol{transform-origin:left center}
 .fly{transform:translate(var(--dx),var(--dy))}
@@ -171,8 +275,8 @@ textarea{font-size:14px}
 .absorbed{transform:translate(var(--dx),var(--dy));opacity:0}
 .bounced{transform:translate(-36px,0);opacity:.4}
 .slide{left:26%}
-@keyframes up{from{opacity:0;transform:translateY(16px)}}
-@keyframes pop{0%{opacity:0;transform:scale(.5)}70%{opacity:1;transform:scale(1.06)}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}}
+@keyframes pop{0%{opacity:0;transform:scale(.72)}62%{opacity:1;transform:scale(1.03)}}
 @keyframes fade{from{opacity:0}}
 @keyframes hide{from{opacity:1}}
 @keyframes growY{from{transform:scaleY(0)}}
@@ -194,7 +298,7 @@ textarea{font-size:14px}
 @keyframes blink{50%{opacity:.15}}
 @keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
 .pulse{opacity:0;transform-box:fill-box;transform-origin:center;animation:pulse 1.8s ease-out infinite}
-@media(prefers-reduced-motion:reduce){.a,.letters span.hl,.pulse,.spark,.caret,.rec i,.tile.sp::after,.prog{animation:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){.a,.letters span.hl,.pulse,.spark,.caret,.rec i,.tile.sp::after,.prog,.bob,.tile>svg,.talk i,.hook,.hook .hm,.hook .hl,.cue .arr,.kick .kd,.scene,.orb,.play,.play .ring,.gfaces,.gfaces svg,.gcard h1,.gcard p,.gcard .kick,.gtext>*,.gvis,.gspot,.gdot,.nmLoop,.qLoop,.gthink i{animation:none!important;transition:none!important}.qLoop{opacity:0}.hook .hm{background-size:100% 62%}}
 /* simulation */
 .sim{padding-bottom:64px}
 .simhead{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:flex-end;justify-content:space-between;padding-top:26px;padding-bottom:16px}
@@ -206,8 +310,10 @@ textarea{font-size:14px}
 .stp b{display:block;font-size:15px;line-height:1.2}
 .stp small{display:block;font-size:13px;color:var(--mut);line-height:1.25}
 .stp.dn .n{background:var(--mint);border-color:transparent;color:var(--ok)}
-.stp.on{background:#fff;border-color:#fff;box-shadow:0 8px 22px rgba(60,70,120,.1)}
-.stp.on .n{background:var(--grad);border-color:transparent;color:var(--ink)}
+.stp{transition:background .35s var(--ease),box-shadow .35s var(--ease)}
+.stp.on{background:var(--gBrand);border-color:transparent;color:#fff;box-shadow:0 14px 28px -12px rgba(70,70,210,.7)}
+.stp.on small{color:rgba(255,255,255,.85)}
+.stp.on .n{background:rgba(255,255,255,.24);border-color:transparent;color:#fff}
 .stripc{padding:16px 18px 14px;margin-bottom:18px}
 .striphd{display:flex;flex-wrap:wrap;gap:4px 16px;justify-content:space-between;align-items:baseline;font-size:14px}
 .striphd b{font-size:16px}
@@ -328,7 +434,7 @@ textarea{font-size:14px}
 .chs{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .chs .lbl{font-size:13px;font-weight:700;color:var(--mut);min-width:10.5em}
 .ch{min-height:40px;min-width:40px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font:inherit;font-size:14px;font-weight:700;cursor:pointer;color:var(--ink)}
-.ch.on{background:var(--grad);border-color:transparent}
+.ch.on{background:var(--gBrand);border-color:transparent;color:#fff}
 .hero{padding:24px;margin-bottom:16px}
 .verdict{display:inline-block;padding:6px 14px;border-radius:999px;font-weight:800;font-size:14px;margin:0 8px 10px 0}
 .verdict.yes{background:var(--mint);color:#0f5f3f}
@@ -340,8 +446,8 @@ textarea{font-size:14px}
 .bb .lab small{display:block;font-weight:500;color:var(--mut);font-size:13px}
 .bt{position:relative;height:36px;border-radius:12px;background:rgba(35,37,58,.06)}
 .bf{position:absolute;top:0;bottom:0;left:0;border-radius:12px;transform-origin:left center}
-.bf.pra{background:linear-gradient(90deg,#ffb39c,var(--pra))}
-.bf.pasca{background:linear-gradient(90deg,#9cc7ff,var(--pasca))}
+.bf.pra{background:linear-gradient(90deg,#f6a183,#e4532f)}
+.bf.pasca{background:linear-gradient(90deg,#86b8f5,#2f6fd8)}
 .bv{font-weight:800;font-size:22px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 @media(max-width:560px){.bb{grid-template-columns:minmax(0,1fr) 3.6em;row-gap:6px}.bb .lab{grid-column:1/-1;margin-top:6px}}
 .rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:16px}
@@ -393,9 +499,23 @@ details.card[open] summary{margin-bottom:12px}
 </div></header>
 
 <main id="story" class="story">
-  <section class="stage" aria-live="polite"><div class="scene" id="scene"></div></section>
-  <nav class="snav" aria-label="Navigasi penjelasan">
-    <button type="button" class="btn" data-act="prev" id="bPrev">← Kembali</button>
+  <section class="gate" id="gate" hidden><div class="gwrap">
+    <div class="gtext">
+      <div class="kick g-violet"><span class="kn">00</span><span class="kl">Penjelasan</span><i class="kd"></i></div>
+      <h1>The Mind Before <span class="gt">the Moment</span></h1>
+      <p>Kenapa kita mudah lupa nama orang yang tampil tepat sebelum giliran kita? Penjelasan singkat tentang next-in-line effect dan antisipasi performa.</p>
+      <div class="row"><button type="button" class="btn pri big" data-act="begin" id="bBegin"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>Mulai penjelasan</button><button type="button" class="btn big" data-act="mode" data-m="simulasi" id="bGateSim">Buka simulasi</button></div>
+      <button type="button" class="glink2" data-act="resume" id="bResume" hidden></button>
+    </div>
+    <div class="gvis" aria-hidden="true"><i class="orb o1"></i><i class="orb o2"></i>
+      <div class="ghead"><span class="gdot"></span>Sesi perkenalan berlangsung</div>
+      <div class="gq" id="gq"></div>
+      <p class="gcap">Makin dekat ke giliranmu, makin sedikit nama yang terekam.</p>
+    </div>
+  </div></section>
+  <section class="stage" id="stage" aria-live="polite"><div class="scene" id="scene"></div></section>
+  <nav class="snav" id="snav" aria-label="Navigasi penjelasan">
+    <button type="button" class="btn" data-act="prev" id="bPrev" aria-label="Kembali">←<span class="rl"> Kembali</span></button>
     <button type="button" class="btn rp" data-act="replay" id="bReplay" aria-label="Putar ulang animasi">↻<span class="rl"> Putar ulang</span></button>
     <div class="dots" id="dots"></div>
     <span class="count" id="count"></span>
@@ -464,7 +584,7 @@ function face(i,attr=''){
   const gl=a.gl?'<g fill="none" stroke="#2b2b33" stroke-width="1.7"><circle cx="43" cy="47.5" r="5.6"/><circle cx="57" cy="47.5" r="5.6"/><path d="M48.6 47.5H51.4M37.4 46.5L31.5 45.5M62.6 46.5L68.5 45.5"/></g>':'';
   return `<svg viewBox="0 0 100 100" ${attr} aria-hidden="true" focusable="false"><defs><clipPath id="${id}"><circle cx="50" cy="50" r="50"/></clipPath></defs><g clip-path="url(#${id})"><rect width="100" height="100" fill="${a.bg}"/>${hij?shirt+back:back+shirt}${neck}<ellipse cx="50" cy="45" rx="19" ry="22.5" fill="${K}"/><path d="M50 22.5C61 22.5 69 32.5 69 45S61 67.5 50 67.5C57.5 61 60.5 53 60.5 45S57.5 29 50 22.5Z" fill="#000" opacity=".07"/>${front}<path d="${brow}" fill="none" stroke="${hij?'#2a1c12':H}" stroke-width="2" stroke-linecap="round"/><circle cx="43" cy="47.5" r="2.3" fill="#1a1410"/><circle cx="57" cy="47.5" r="2.3" fill="#1a1410"/><circle cx="43.8" cy="46.7" r=".7" fill="#fff"/><circle cx="57.8" cy="46.7" r=".7" fill="#fff"/><path d="M50 49.5Q48.3 53.5 50.6 54" fill="none" stroke="#000" stroke-opacity=".22" stroke-width="1.5" stroke-linecap="round"/><ellipse cx="38" cy="53" rx="3.5" ry="2" fill="#ff8f8f" opacity=".25"/><ellipse cx="62" cy="53" rx="3.5" ry="2" fill="#ff8f8f" opacity=".25"/>${mouth}${gl}</g></svg>`;
 }
-const fa=(i,x,y,s)=>face(i,`x="${x}" y="${y}" width="${s}" height="${s}"`);
+const fa=(i,x,y,s)=>`<g class="bob" style="animation-delay:-${((x*13+y*7)%45/10).toFixed(1)}s">${face(i,`x="${x}" y="${y}" width="${s}" height="${s}"`)}</g>`;
 
 /* svg helpers for scenes */
 const sv=(w,h,inner,label)=>`<svg class="scn" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label)}">${inner}</svg>`;
@@ -479,7 +599,7 @@ const SHINE='<rect x="166" y="50" width="9" height="226" rx="4.5" fill="#fff" op
 function artZoom(){
   const Tl=[{n:'Aiko',a:0},{n:'Farhan',a:9,sp:1},{n:'Minh',a:1},{n:'Siti',a:4},{n:'Kamu',a:2,you:1},{n:'Paolo',a:7}];
   const nm=`<span class="nmA a" style="--k:hide;--t:5.4s;--d:.5s">Farhan</span><span class="a" style="--k:fade;--t:5.8s;--d:.6s">…siapa?</span>`;
-  return `<div class="zoom">${Tl.map((x,i)=>`<div class="tile a${x.sp?' sp':''}${x.you?' you':''}" style="--t:${(.15+i*.12).toFixed(2)}s">${face(x.a)}<span class="tag">${x.sp?nm:x.n}</span></div>`).join('')}
+  return `<div class="zoom">${Tl.map((x,i)=>`<div class="tile a${x.sp?' sp':''}${x.you?' you':''}" style="--t:${(.15+i*.12).toFixed(2)}s">${face(x.a)}<span class="tag">${x.sp?nm:x.n}</span>${x.sp?'<span class="talk" aria-hidden="true"><i></i><i></i><i></i></span>':''}</div>`).join('')}
   <div class="say a" style="--k:pop;--t:1.1s"><span class="sayn"><span class="nmA a" style="--k:hide;--t:5.4s;--d:.5s">Hai! Aku Farhan, dari Dhaka.</span><span class="a" style="--k:fade;--t:5.8s;--d:.6s">Hai! Aku <b class="q">…</b>, dari Dhaka.</span></span></div>
   <div class="think a" style="--k:pop;--t:2s"><i class="ln a ol" style="--k:growX;--t:2.4s">Namaku…</i><i class="ln a ol" style="--k:growX;--t:3s">Aku dari…</i><i class="ln a ol" style="--k:growX;--t:3.6s">Hobiku…</i></div></div>`;
 }
@@ -569,18 +689,18 @@ function artFlow(){return `<ol class="flow">${FLOW.map((f,i)=>`<li class="a" sty
 function artCTA(){return `<div class="cta"><div class="mini">${Array.from({length:10},(_,i)=>`<span class="ms a${i>=5?' pr':''}" style="--k:pop;--t:${(.1+i*.08).toFixed(2)}s">${face(i)}<b>#${i+1}</b></span>`).join('')}</div><span class="spark s1">✦</span><span class="spark s2">✦</span><span class="spark s3">✦</span></div>`}
 
 const SC=[
- {k:'Coba ingat-ingat',t:'Pernahkah kamu lupa apa yang baru saja dipresentasikan temanmu karena sibuk mempersiapkan giliranmu sendiri?',hook:1,art:artZoom,b:'<p>Kalau pernah, kamu tidak sendirian. Fenomena ini punya nama, dan penelitian kami ingin mengujinya. Yuk, kita bahas pelan-pelan.</p>'},
- {k:'Namanya next-in-line effect',t:'Orang yang tampil tepat sebelum giliranmu paling mudah terlupakan',art:artQueue,b:'<p>Saat menunggu giliran dalam satu urutan, daya ingat kita terhadap pembicara tepat sebelum kita melemah. Makin dekat ke giliran sendiri, makin sedikit yang terekam.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
- {k:'Penyebab 1: antisipasi performa',t:'Memori kerja penuh dengan persiapan diri sendiri',art:artAnt,b:'<p>Saat bersiap tampil, sebagian besar kapasitas perhatian dan memori kerja dipakai untuk menyusun kalimat dan melatih perkenalan dalam hati. Informasi dari pembicara lain jadi tidak ter-encode dengan baik.</p><p>Kondisi bersiap ini saja sudah cukup menurunkan ingatan, bahkan tanpa rasa cemas yang berat.</p>',src:'Forrin &amp; MacLeod (2019)'},
- {k:'Penyebab 2: perhatian berbalik ke diri sendiri',t:'Dari menyimak orang lain, jadi sibuk memikirkan diri sendiri',art:artSelf,b:'<p>Menjelang tampil, perhatian bergeser dari lingkungan luar ke dalam diri (<i>self-focused attention</i>): menyiapkan penampilan sambil mengelola ketegangan karena akan dinilai orang lain.</p><p>Akibatnya, identitas dan informasi dari pembicara sebelumnya sulit terserap.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
- {k:'Penyebab 3: sinyal yang diperlemah',t:'Nama yang baru didengar kalah sebelum sempat dikenali',art:artAtt,b:'<p>Menurut teori atenuasi, informasi yang tidak sedang difokuskan tidak diblokir, tapi sinyalnya diperlemah sebelum diproses maknanya.</p><p>Di kamus mental (<i>dictionary unit</i>), kata yang akrab punya ambang aktivasi rendah, sedangkan nama asing yang baru pertama kali didengar butuh sinyal penuh. Saat perhatian terpecah, nama peserta lain gagal melewati ambang itu, jadi tidak tersimpan untuk diingat kembali.</p>',src:'Treisman (1964)'},
- {k:'Setelah tampil',t:'Begitu giliran selesai, perhatian kembali pulih',art:artAfter,b:'<p>Beban antisipasi dan fokus pada diri sendiri mereda. Kapasitas perhatian bisa dipakai lagi untuk menyerap dan mengingat nama pembicara berikutnya dengan lebih akurat.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
- {k:'Pertanyaan penelitian',t:'Apakah menunggu giliran tampil membuat kita lebih sulit mengingat nama?',art:artHyp,b:'<div class="hy"><b>H₀</b><span>Tidak ada perbedaan akurasi recall nama antara peserta pra-tampil dan pasca-tampil.</span></div><div class="hy h1"><b>H₁</b><span>Peserta pra-tampil memiliki akurasi recall nama yang lebih rendah daripada peserta pasca-tampil.</span></div>'},
- {k:'Desain eksperimen',t:'Urutan tampil menentukan siapa yang harus diingat',art:artDesign,b:'<p>Sepuluh peserta memperkenalkan diri bergiliran selama sekitar 30 detik. Mereka tidak diberi tahu bahwa nanti ada tes mengingat nama.</p><div class="vars"><div class="var"><b>Variabel bebas: antisipasi performa</b>Pra-tampil (urutan 6–10) mengingat 4 orang tepat sebelum gilirannya. Pasca-tampil (urutan 1–5) mengingat urutan 6–9 setelah selesai tampil.</div><div class="var"><b>Variabel terikat: akurasi recall nama</b>Proporsi nama yang diingat tepat sesuai identitasnya.</div></div>'},
- {k:'Partisipan',t:'100 peserta dari berbagai negara di Asia yang belum saling kenal',art:artSample,b:'<p>Penelitian berlangsung lima hari, satu sesi per hari. Setiap sesi berisi 20 peserta yang dibagi acak ke dua kondisi.</p><div class="crit"><b>Bisa ikut</b><span class="cp ok">Usia 18–25 tahun</span><span class="cp ok">Mampu berbahasa Inggris</span></div><div class="crit"><b>Tidak diikutkan</b><span class="cp no">Sudah saling kenal</span><span class="cp no">Gangguan pendengaran</span><span class="cp no">Kecemasan sosial tinggi</span></div>'},
- {k:'Alat ukur',t:'Empat alat untuk menjaga eksperimen tetap adil',art:artTools,b:'<ul class="ul"><li><b>Letter Memory Task</b> memastikan kapasitas dasar memori kerja kedua kelompok setara sebelum perlakuan.</li><li><b>Lembar recall nama</b> mencatat 4 nama target, dari n−4 sampai n−1.</li><li><b>SIAS</b> menyaring calon peserta dengan kecemasan sosial tinggi.</li><li><b>Timer dan kamera</b> menyeragamkan durasi presentasi.</li></ul>'},
- {k:'Alur penelitian',t:'Enam langkah dalam satu sesi Zoom',art:artFlow,b:'<p>Semua langkah dijalankan dengan naskah dan durasi yang sama untuk setiap sesi, supaya perbedaan hasil benar-benar datang dari urutan tampil.</p>'},
- {k:'Giliranmu',t:'Sekarang coba jalankan eksperimennya',art:artCTA,b:'<p>Simulasi mengikuti alur yang sama, langkah demi langkah. Kamu bisa mengisi data sendiri, atau langsung melihat contoh hasilnya.</p><div class="row" style="margin-top:6px"><button type="button" class="btn pri big" data-act="mode" data-m="simulasi" id="bOpenSim">Buka simulasi</button><button type="button" class="btn" data-act="demoResult" id="bDemo">Lihat contoh hasil</button></div>'}
+ {n:'01',l:'Pembuka',g:'violet',t:'Pernahkah kamu lupa apa yang baru saja dipresentasikan temanmu karena sibuk mempersiapkan giliranmu sendiri?',hook:1,art:artZoom,b:''},
+ {n:'02',l:'Next-in-line effect',g:'blue',t:'Orang yang tampil tepat sebelum giliranmu paling mudah terlupakan',art:artQueue,b:'<p>Saat menunggu giliran dalam satu urutan, daya ingat kita terhadap pembicara tepat sebelum kita melemah. Makin dekat ke giliran sendiri, makin sedikit yang terekam.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
+ {n:'03',l:'Antisipasi performa',g:'coral',t:'Penyebab 1: memori kerja penuh dengan persiapan diri sendiri',art:artAnt,b:'<p>Saat bersiap tampil, sebagian besar kapasitas perhatian dan memori kerja dipakai untuk menyusun kalimat dan melatih perkenalan dalam hati. Informasi dari pembicara lain jadi tidak ter-encode dengan baik.</p><p>Kondisi bersiap ini saja sudah cukup menurunkan ingatan, bahkan tanpa rasa cemas yang berat.</p>',src:'Forrin &amp; MacLeod (2019)'},
+ {n:'04',l:'Perhatian ke diri sendiri',g:'violet',t:'Penyebab 2: dari menyimak orang lain, jadi sibuk memikirkan diri sendiri',art:artSelf,b:'<p>Menjelang tampil, perhatian bergeser dari lingkungan luar ke dalam diri (<i>self-focused attention</i>): menyiapkan penampilan sambil mengelola ketegangan karena akan dinilai orang lain.</p><p>Akibatnya, identitas dan informasi dari pembicara sebelumnya sulit terserap.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
+ {n:'05',l:'Teori atenuasi',g:'blue',t:'Penyebab 3: nama yang baru didengar kalah sebelum sempat dikenali',art:artAtt,b:'<p>Menurut teori atenuasi, informasi yang tidak sedang difokuskan tidak diblokir, tapi sinyalnya diperlemah sebelum diproses maknanya.</p><p>Di kamus mental (<i>dictionary unit</i>), kata yang akrab punya ambang aktivasi rendah, sedangkan nama asing yang baru pertama kali didengar butuh sinyal penuh. Saat perhatian terpecah, nama peserta lain gagal melewati ambang itu, jadi tidak tersimpan untuk diingat kembali.</p>',src:'Treisman (1964)'},
+ {n:'06',l:'Setelah tampil',g:'teal',t:'Begitu giliran selesai, perhatian kembali pulih',art:artAfter,b:'<p>Beban antisipasi dan fokus pada diri sendiri mereda. Kapasitas perhatian bisa dipakai lagi untuk menyerap dan mengingat nama pembicara berikutnya dengan lebih akurat.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
+ {n:'07',l:'Hipotesis',g:'violet',t:'Apakah menunggu giliran tampil membuat kita lebih sulit mengingat nama?',art:artHyp,b:'<div class="hy"><b>H₀</b><span>Tidak ada perbedaan akurasi recall nama antara peserta pra-tampil dan pasca-tampil.</span></div><div class="hy h1"><b>H₁</b><span>Peserta pra-tampil memiliki akurasi recall nama yang lebih rendah daripada peserta pasca-tampil.</span></div>'},
+ {n:'08',l:'Desain eksperimen',g:'blue',t:'Urutan tampil menentukan siapa yang harus diingat',art:artDesign,b:'<p>Sepuluh peserta memperkenalkan diri bergiliran selama sekitar 30 detik. Mereka tidak diberi tahu bahwa nanti ada tes mengingat nama.</p><div class="vars"><div class="var"><b>Variabel bebas: antisipasi performa</b>Pra-tampil (urutan 6–10) mengingat 4 orang tepat sebelum gilirannya. Pasca-tampil (urutan 1–5) mengingat urutan 6–9 setelah selesai tampil.</div><div class="var"><b>Variabel terikat: akurasi recall nama</b>Proporsi nama yang diingat tepat sesuai identitasnya.</div></div>'},
+ {n:'09',l:'Partisipan',g:'teal',t:'100 peserta dari berbagai negara di Asia yang belum saling kenal',art:artSample,b:'<p>Penelitian berlangsung lima hari, satu sesi per hari. Setiap sesi berisi 20 peserta yang dibagi acak ke dua kondisi.</p><div class="crit"><b>Bisa ikut</b><span class="cp ok">Usia 18–25 tahun</span><span class="cp ok">Mampu berbahasa Inggris</span></div><div class="crit"><b>Tidak diikutkan</b><span class="cp no">Sudah saling kenal</span><span class="cp no">Gangguan pendengaran</span><span class="cp no">Kecemasan sosial tinggi</span></div>'},
+ {n:'10',l:'Alat ukur',g:'coral',t:'Empat alat untuk menjaga eksperimen tetap adil',art:artTools,b:'<ul class="ul"><li><b>Letter Memory Task</b> memastikan kapasitas dasar memori kerja kedua kelompok setara sebelum perlakuan.</li><li><b>Lembar recall nama</b> mencatat 4 nama target, dari n−4 sampai n−1.</li><li><b>SIAS</b> menyaring calon peserta dengan kecemasan sosial tinggi.</li><li><b>Timer dan kamera</b> menyeragamkan durasi presentasi.</li></ul>'},
+ {n:'11',l:'Prosedur',g:'blue',t:'Enam langkah dalam satu sesi Zoom',art:artFlow,b:'<p>Semua langkah dijalankan dengan naskah dan durasi yang sama untuk setiap sesi, supaya perbedaan hasil benar-benar datang dari urutan tampil.</p>'},
+ {n:'12',l:'Simulasi',g:'violet',t:'Sekarang coba jalankan eksperimennya',art:artCTA,b:'<p>Simulasi mengikuti alur yang sama, langkah demi langkah. Kamu bisa mengisi data sendiri, atau langsung melihat contoh hasilnya.</p><div class="row" style="margin-top:6px"><button type="button" class="btn pri big" data-act="mode" data-m="simulasi" id="bOpenSim">Buka simulasi</button><button type="button" class="btn" data-act="demoResult" id="bDemo">Lihat contoh hasil</button></div>'}
 ];
 
 /* state */
@@ -588,7 +708,7 @@ let S=null;
 const blankP=(n,i)=>({id:uid(),name:n,age:null,sias:null,lmt:null,eng:true,stranger:true,hearing:true,av:i});
 function blankSess(names,avs){return {ps:names.map((n,i)=>blankP(n,avs?avs[i]:i)),check:{cam:false,consent:false,rules:false},order:null,pres:[],cur:0,recallAt:null,recall:{},iv:{},sim:false}}
 function sampleSess(){const s=blankSess(POOL.slice(0,10));const A=[21,19,23,22,20,24,19,22,21,25],SI=[18,24,12,29,15,21,9,26,17,22],L=[.81,.69,.88,.75,.63,.78,.72,.84,.66,.79];s.ps.forEach((p,i)=>{p.age=A[i];p.sias=SI[i];p.lmt=L[i]});return s}
-function initState(){const s=sampleSess();return {v:2,mode:'cerita',scene:0,seen:0,step:0,sel:null,scen:'efek',dur:30,cut:34,view:'sesi',lmtSp:'1500',sess:s,groups:[]}}
+function initState(){const s=sampleSess();return {v:2,mode:'cerita',scene:0,seen:0,step:0,voice:true,sel:null,scen:'efek',dur:30,cut:34,view:'sesi',lmtSp:'1500',sess:s,groups:[]}}
 const save=()=>{try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}};
 const load=()=>{try{const t=localStorage.getItem(LS);return t?JSON.parse(t):null}catch(e){return null}};
 const P=(s,id)=>s.ps.find(p=>p.id===id);
@@ -633,20 +753,35 @@ function simIv(s){if(!s.order)return;s.order.forEach((pid,i)=>{if(s.iv[pid]&&s.i
 function simEverything(s){simScreen(s);simOpen(s);s.iv={};simPres(s);simRecall(s);simIv(s);s.sim=true}
 
 /* ---------- story ---------- */
-let typeT=null;
+const RC={blue:'49,104,214',coral:'228,90,57',violet:'100,80,220',teal:'22,150,130'};
+let started=false,busy=false,dirx=0;
+const AUD=new Audio();AUD.preload='auto';
+AUD.addEventListener('play',()=>{const b=$('#bVoice');if(b)b.classList.add('talking')});
+['pause','ended'].forEach(ev=>AUD.addEventListener(ev,()=>{const b=$('#bVoice');if(b)b.classList.remove('talking')}));
+const meta=()=>window.NARR_META||{};
+function playVoice(){if(!started||!S.voice||S.mode!=='cerita'||!window.NARR)return;const src=window.NARR['s'+S.scene];if(!src)return;try{AUD.pause();AUD.src=src;AUD.currentTime=0;const p=AUD.play();if(p&&p.catch)p.catch(()=>{})}catch(e){}}
+function stopVoice(){try{AUD.pause()}catch(e){}}
+function hookTitle(sc){const m=meta().s0,useV=!!(S.voice&&window.NARR&&m),cue=useV?m.split:2.6;
+  const h=esc(sc.t).replace('lupa','<span class="hm hm1" style="--md:.9s">lupa</span>').replace('dipresentasikan temanmu','<span class="hm hm2" style="--md:1.3s">dipresentasikan temanmu</span>').replace('giliranmu sendiri?','<span class="hl">giliranmu sendiri?</span>');
+  return `<h2 class="hook">${h}</h2><p class="cue a" style="--k:up;--t:${cue.toFixed(2)}s">Mari simak penjelasan berikut. <span class="arr" aria-hidden="true">→</span></p>`}
 function renderStory(){
-  const sc=SC[S.scene],el=$('#scene');clearInterval(typeT);
-  el.innerHTML=`<div class="sh a"><span class="kick">${sc.k}</span><h2${sc.hook?` class="hook" aria-label="${esc(sc.t)}"`:''}>${sc.hook?'<span id="typed" aria-hidden="true"></span><span class="caret" aria-hidden="true"></span>':sc.t}</h2></div><figure class="art glass a" style="--t:.1s"><div id="artIn">${sc.art()}</div></figure><div class="sb a" style="--t:.2s">${sc.b}${sc.src?`<p class="src">Sumber: ${sc.src}</p>`:''}</div>`;
-  fixPaths();if(sc.hook)typeOut();
-  S.seen=Math.max(S.seen||0,S.scene);
-  $('#dots').innerHTML=SC.map((x,i)=>`<button type="button" class="${i===S.scene?'on':i<=S.seen?'seen':''}" data-act="scene" data-i="${i}" aria-label="Bagian ${i+1}: ${esc(x.k)}"${i===S.scene?' aria-current="step"':''}><i></i></button>`).join('');
+  const gate=!started;$('#gate').hidden=!gate;$('#stage').hidden=gate;$('#snav').hidden=gate;
+  if(gate){const Q=[['Aiko',0,'n−4'],['Minh',1,'n−3'],['Siti',4,'n−2'],['Farhan',9,'n−1']];$('#gq').innerHTML='<span class="gspot"></span>'+Q.map((q,k)=>`<div class="gs">${face(q[1])}<b>${k===3?'<span class="nmLoop">Farhan</span><span class="qLoop">?</span>':`<span>${q[0]}</span>`}</b><small>${q[2]}</small></div>`).join('')+`<div class="gs you"><span class="gthink"><i></i><i></i><i></i></span>${face(2)}<b><span>Kamu</span></b><small>berikut</small></div>`;const r=$('#bResume');r.hidden=!(S.scene>0);r.textContent=`Atau lanjutkan dari bagian ${S.scene+1}`;return}
+  const sc=SC[S.scene],el=$('#scene');el.style.setProperty('--dirx',dirx+'px');
+  el.innerHTML=`<div class="sh a" style="--k:enter"><div class="kick g-${sc.g}"><span class="kn">${sc.n}</span><span class="kl">${sc.l}</span><i class="kd"></i></div>${sc.hook?hookTitle(sc):`<h2>${sc.t}</h2>`}</div><figure class="art glass a" style="--k:enter;--t:.12s;--rc:${RC[sc.g]}"><div id="artIn">${sc.art()}</div></figure><div class="sb a" style="--k:enter;--t:.24s">${sc.b}${sc.src?`<p class="src">Sumber: ${sc.src}</p>`:''}</div>`;
+  fixPaths();S.seen=Math.max(S.seen||0,S.scene);
+  $('#dots').innerHTML=SC.map((x,i)=>`<button type="button" class="${i===S.scene?'on':i<=S.seen?'seen':''}" data-act="scene" data-i="${i}" aria-label="Bagian ${i+1}: ${esc(x.l)}"${i===S.scene?' aria-current="step"':''}><i></i></button>`).join('');
   $('#count').textContent=(S.scene+1)+' / '+SC.length;
   $('#bPrev').disabled=S.scene===0;
-  $('#bNext').textContent=S.scene===0?'Mulai →':S.scene===SC.length-1?'Buka simulasi →':'Lanjut →';
+  $('#bNext').innerHTML=S.scene===SC.length-1?'<span class="rl">Buka </span>Simulasi →':'Lanjut →';
 }
+function voiceBtn(){const b=$('#bVoice');if(!b)return;b.classList.toggle('off',!S.voice);b.setAttribute('aria-pressed',String(!!S.voice));$('#voiceLbl').textContent=S.voice?' Suara':' Suara mati'}
 function fixPaths(){document.querySelectorAll('#scene path.dr').forEach(p=>{const L=Math.ceil(p.getTotalLength());p.setAttribute('stroke-dasharray',L);p.style.setProperty('--len',L)})}
-function typeOut(){const el=$('#typed');if(!el)return;const t=SC[0].t;if(reduce()){el.textContent=t;return}let i=0;el.textContent='';typeT=setInterval(()=>{i++;el.textContent=t.slice(0,i);if(i>=t.length)clearInterval(typeT)},30)}
-function goScene(i){S.scene=clamp(i,0,SC.length-1);save();renderStory();window.scrollTo({top:0,behavior:reduce()?'auto':'smooth'})}
+function begin(v){S.voice=v;started=true;dirx=0;save();renderStory();window.scrollTo({top:0})}
+function goScene(i){i=clamp(i,0,SC.length-1);if(i===S.scene||busy)return;const el=$('#scene'),fwd=i>S.scene;stopVoice();
+  if(reduce()){S.scene=i;dirx=0;save();renderStory();window.scrollTo({top:0});return}
+  busy=true;el.classList.add(fwd?'out-n':'out-p');
+  setTimeout(()=>{S.scene=i;dirx=fwd?44:-44;save();el.classList.remove('out-n','out-p');renderStory();busy=false;window.scrollTo({top:0,behavior:'smooth'})},290)}
 
 /* ---------- simulation ---------- */
 const STEPS=[{t:'Peserta',d:'Saring & LMT'},{t:'Pembukaan',d:'Buka & undi'},{t:'Presentasi',d:'±30 detik'},{t:'Tes ingatan',d:'Tulis 4 nama'},{t:'Wawancara',d:'Tanya peserta'},{t:'Hasil',d:'Bandingkan'}];
@@ -763,7 +898,7 @@ function render(){const fid=document.activeElement&&document.activeElement.id;
   if(S.mode==='cerita')renderStory();else renderSim();
   if(fid){const el=document.getElementById(fid);if(el&&el!==document.activeElement)el.focus({preventScroll:true})}}
 function commit(){save();render()}
-function setMode(m){S.mode=m;save();clearInterval(typeT);render();const h='#'+m;if(location.hash!==h){try{history.replaceState(null,'',h)}catch(e){}}window.scrollTo({top:0})}
+function setMode(m){S.mode=m;save();if(m!=='cerita')stopVoice();render();const h='#'+m;if(location.hash!==h){try{history.replaceState(null,'',h)}catch(e){}}window.scrollTo({top:0})}
 function goStep(i){S.step=clamp(i,0,5);save();renderSim();const st=$('#steps');if(st&&st.getBoundingClientRect().top<0)st.scrollIntoView({block:'start'})}
 function refreshLight(){const s=S.sess;renderSteps();renderStrip();s.ps.forEach(p=>{const st=status(p),b=document.getElementById('bd-'+p.id),w=document.getElementById('why-'+p.id);if(b)b.innerHTML=badge(st);if(w)w.textContent=st.k==='ok'?'':st.t});const k=$('#okCount');if(k)k.textContent=s.ps.filter(p=>status(p).k==='ok').length}
 
@@ -805,7 +940,11 @@ const ACT={
   next:()=>{if(S.scene>=SC.length-1)setMode('simulasi');else goScene(S.scene+1)},
   prev:()=>goScene(S.scene-1),
   scene:b=>goScene(+b.dataset.i),
-  replay:()=>{const sc=SC[S.scene];$('#artIn').innerHTML=sc.art();fixPaths();if(sc.hook){clearInterval(typeT);typeOut()}},
+  replay:()=>{dirx=0;renderStory()},
+  begin:()=>{S.scene=0;begin(false)},
+  resume:()=>begin(false),
+  beginMute:()=>begin(false),
+  voice:()=>{S.voice=!S.voice;save();voiceBtn();if(S.voice)playVoice();else stopVoice()},
   demoResult:()=>{simEverything(S.sess);S.view='sesi';S.step=5;setMode('simulasi')},
   step:b=>goStep(+b.dataset.i),
   pick:b=>{const id=b.dataset.pid;S.sel=S.sel===id&&[0,1,5].includes(S.step)?null:id;commit()},
@@ -845,7 +984,7 @@ document.addEventListener('input',e=>{const el=e.target,f=el.dataset&&el.dataset
   if(f==='opt.cut'){S.cut=num(val)??34;save();refreshLight()}});
 document.addEventListener('keydown',e=>{const el=e.target;
   if(e.key==='Escape'&&!$('#modal').hidden){closeModal();return}
-  if(S.mode==='cerita'&&$('#modal').hidden&&!/INPUT|TEXTAREA/.test(el.tagName)){if(e.key==='ArrowRight'){e.preventDefault();ACT.next()}else if(e.key==='ArrowLeft'&&S.scene>0){e.preventDefault();ACT.prev()}}
+  if(S.mode==='cerita'&&started&&$('#modal').hidden&&!/INPUT|TEXTAREA|BUTTON/.test(el.tagName)||(S.mode==='cerita'&&started&&el.tagName==='BUTTON'&&/^(ArrowRight|ArrowLeft)$/.test(e.key))){if(e.key==='ArrowRight'){e.preventDefault();ACT.next()}else if(e.key==='ArrowLeft'&&S.scene>0){e.preventDefault();ACT.prev()}}
   if(e.key!=='Enter'||!el.id)return;
   if(el.classList.contains('rcin')){e.preventDefault();const k=+el.dataset.k;if(k<3)$('#rc'+(k+1)).focus();else{const b=$('#bRecSave');if(b)b.click()}}
   else if(el.id==='lmtin'){e.preventDefault();ACT.lmtAns()}});
