@@ -905,6 +905,7 @@ function refreshLight(){const s=S.sess;renderSteps();renderStrip();s.ps.forEach(
 /* audio + timer */
 let AC=null,beepKey='';
 function unlock(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume()}catch(e){}}
+function clk(){try{unlock();if(!AC)return;const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.setValueAtTime(900,t);o.frequency.exponentialRampToValueAtTime(420,t+.07);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.16,t+.006);g.gain.exponentialRampToValueAtTime(.0001,t+.09);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.12)}catch(e){}}
 function beep(f,d){try{if(!AC)return;const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.frequency.value=f;o.connect(g);g.connect(AC.destination);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.start(t);o.stop(t+d+.05)}catch(e){}}
 function tick(){if(!S||S.mode!=='simulasi'||S.step!==2)return;const s=S.sess;if(!s.order||s.cur>=10)return;const r=s.pres[s.cur],ring=$('#ringp'),n=$('#tnum'),l=$('#tlab'),box=$('#tbox'),C=2*Math.PI*88;if(!ring)return;
   if(!r||!r.s||r.e){ring.style.strokeDashoffset='0';n.textContent=S.dur;l.textContent='detik';box.classList.remove('over');return}
@@ -974,7 +975,7 @@ const ACT={
 };
 
 /* events */
-document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+document.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.disabled)return;clk();
   if(b.hasAttribute('data-confirm')&&!b.classList.contains('armed')){b.classList.add('armed');b.dataset.orig=b.textContent;b.textContent='Yakin? Klik lagi';setTimeout(()=>{if(b.isConnected){b.classList.remove('armed');b.textContent=b.dataset.orig}},3000);return}
   const f=ACT[b.dataset.act];if(f)f(b,e)});
 $('#modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
