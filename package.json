@@ -1,0 +1,7 @@
+{
+  "name": "prototype-rancangan-eksperimen",
+  "private": true,
+  "scripts": {
+    "dev": "pkill -f 'http.server 8081' ; echo 'Buka http://localhost:8081' && python3 -m http.server 8081"
+  }
+}

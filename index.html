@@ -9,8 +9,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
 /* VOICE everyday learning, friendly and light: a class presentation that explains itself
-   IDEA a pastel Zoom call / introduction round, told as a short animated explainer
-   PICTURE one animated scene per idea (zoom grid, memory cloud, working-memory jar, attention beam, attenuated wave), then the seat strip in the simulation
+   IDEA a pastel face-to-face introduction round, told as a short animated explainer
+   PICTURE one animated scene per idea (meeting table, memory cloud, working-memory jar, attention beam, attenuated wave), then the seat strip in the simulation
    COLOUR white ground with soft pastel fields (peach, mint, sky, lilac) under frosted glass; coral = pra-tampil, sky blue = pasca-tampil, butter = spotlight
    TYPE Plus Jakarta Sans 800 display + Plus Jakarta Sans text
    LAYOUT laptop: text left, animation right, story controls pinned at the bottom; phone: title, animation, text, controls */
@@ -489,6 +489,107 @@ details.card[open] summary{margin-bottom:12px}
 .toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,16px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:40;font-size:14px;font-weight:600;max-width:calc(100% - 32px);text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 [hidden]{display:none!important}
+
+/* opening scene: one room, face to face */
+.room{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-areas:"th pr sy" "fl fl fl" "au au au";align-items:center;column-gap:12px;padding:4px 2px 2px}
+.room .think{position:relative;left:auto;bottom:auto;grid-area:th;justify-self:end;width:100%;max-width:150px}
+.room .think::after{content:"";position:absolute;right:16px;bottom:-15px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 4px 10px rgba(60,70,120,.14)}
+.room .say{position:relative;right:auto;top:auto;grid-area:sy;justify-self:start;max-width:170px}
+.room .pres{grid-area:pr;position:relative;display:grid;justify-items:center;gap:6px;padding-top:6px}
+.room .pres>svg{position:relative;z-index:1;width:78px;height:78px;border-radius:50%;box-shadow:0 0 0 4px #fff,0 0 0 7px var(--spot)}
+.room .pspot{position:absolute;left:50%;top:-18px;width:150px;height:150px;margin-left:-75px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,226,122,.6),rgba(255,226,122,0))}
+.room .tag{position:relative;z-index:1;display:grid;justify-items:center;padding:2px 10px;border-radius:999px;background:rgba(35,37,58,.78);color:#fff;font-size:13px;font-weight:700;line-height:1.5;white-space:nowrap}
+.room .talk{top:4px;right:-6px;z-index:2}
+.room .floor{grid-area:fl;height:8px;margin:16px 4% 14px;border-radius:999px;background:linear-gradient(90deg,rgba(var(--rc,100,80,220),0),rgba(var(--rc,100,80,220),.2),rgba(var(--rc,100,80,220),0))}
+.room .aud{grid-area:au;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.room .rs{position:relative;display:grid;justify-items:center;gap:4px;padding:10px 2px 9px;border-radius:18px;background:rgba(255,255,255,.8);border:1px solid var(--edge)}
+.room .rs>svg{width:46px;height:46px;border-radius:50%}
+.room .rs b{font-size:13px;line-height:1.2}
+.room .rs.you{background:linear-gradient(150deg,#ffc6b2,#e4c7f0 55%,#c9bdff);border-color:transparent}
+
+/* keep slide-in animations from widening the page on phones */
+@media(max-width:860px){.story,.sim{overflow-x:hidden;overflow-x:clip}}
+/* ---------- phone: calmer layout, more white space ---------- */
+@media(max-width:600px){
+html{scroll-padding-top:72px}
+body{font-size:15.5px;line-height:1.65}
+.bg i{opacity:.4}
+.top{padding:8px 20px}
+.topin{flex-wrap:nowrap}
+.brand>span:not(.logo){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.seg{padding:3px}
+.seg button{min-height:38px;padding:0 16px;font-size:14px}
+.story{padding:4px 22px 0}
+.stage{min-height:0;align-items:start;padding:22px 0 136px}
+.scene{row-gap:28px}
+.kick{gap:6px;padding:4px 12px 4px 4px;margin-bottom:14px;box-shadow:0 8px 16px -12px rgba(var(--kc,49,104,214),.7),inset 0 1px 0 rgba(255,255,255,.3)}
+.kick .kn{min-width:30px;height:24px;padding:0 8px;font-size:12px}
+.kick .kl{padding:3px 10px;font-size:11px;letter-spacing:.1em}
+.kick .kd{width:6px;height:6px}
+.sh h2{font-size:24px;line-height:1.25;margin:0}
+.sh h2.hook{font-size:27px;line-height:1.22}
+.cue{margin-top:18px;padding:10px 16px;font-size:15px}
+.art{padding:18px 14px 16px;border-radius:24px;box-shadow:0 1px 0 #fff inset,0 0 0 1px rgba(var(--rc,100,80,220),.14),0 16px 36px -26px rgba(var(--rc,100,80,220),.5)}
+.sb{font-size:15.5px;line-height:1.7}
+.sb p{margin:0 0 14px}
+.sb .ul li{margin-bottom:10px}
+.src{font-size:13px;margin-top:4px}
+.var{font-size:14.5px;padding:12px 14px}
+.vars{gap:10px;margin-top:8px}
+.hy{padding:12px;gap:10px;grid-template-columns:38px minmax(0,1fr)}
+.crit{gap:8px;margin-bottom:14px}
+.crit>b{flex-basis:100%;min-width:0;font-size:13px;color:var(--mut)}
+.cp{font-size:13px;padding:4px 11px}
+.tools{gap:12px}
+.flow{gap:10px}
+.flow b{font-size:15px}
+.room{column-gap:8px}
+.room .pres>svg{width:64px;height:64px}
+.room .pspot{width:124px;height:124px;margin-left:-62px}
+.room .say{font-size:13px;padding:8px 10px}
+.room .think .ln{font-size:12px}
+.room .aud{gap:6px}
+.room .rs>svg{width:40px;height:40px}
+.snav{gap:10px;padding:10px 20px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(255,255,255,.88)}
+.snav .btn{min-height:44px}
+.gate{min-height:0;padding:30px 0 56px}
+.gwrap{gap:36px}
+.gtext h1{font-size:36px;margin-bottom:14px}
+.gtext p{font-size:16px;margin-bottom:26px}
+.gtext .row{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.btn.big{min-height:52px;font-size:16px}
+.gvis{padding:20px 16px 20px;border-radius:26px}
+.wrap{padding-left:20px;padding-right:20px}
+.simhead{padding-top:24px;padding-bottom:18px;gap:16px}
+.simhead h1{font-size:26px}
+.simhead p{font-size:14.5px;line-height:1.6}
+.simhead .row .btn{min-height:42px;padding:0 16px;font-size:14.5px}
+.steps{padding-bottom:18px}
+.stp{min-height:46px;padding:5px 15px 5px 5px;gap:8px}
+.stp .n{width:34px;height:34px;font-size:14px}
+.stp b{font-size:14px}
+.stp small{display:none}
+.stripc{padding:14px 14px 12px;margin-bottom:26px}
+.phd{margin:4px 0 20px}
+.phd h2{font-size:22px}
+.phd p{font-size:14.5px;line-height:1.6}
+.glass{border-radius:22px}
+.card{padding:18px 16px}
+.cols{gap:20px}
+.pcards{gap:16px}
+.pc{padding:16px 14px}
+.tg{min-height:36px;padding:0 11px;font-size:12.5px}
+.hero{padding:22px 18px}
+.hero h2{font-size:23px}
+.rgrid{gap:16px}
+.rc{padding:18px 16px}
+.who h3{font-size:21px}
+.toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.days{gap:6px}
+.day{padding:10px 4px;gap:8px}
+.day b{font-size:13px;white-space:nowrap}
+.day small{display:none}
+}
 </style>
 </head>
 <body>
@@ -596,12 +697,16 @@ const JAR=`${T(205,24,'Memori kerja',{a:'middle',fw:800})}<rect x="150" y="36" w
 const SHINE='<rect x="166" y="50" width="9" height="226" rx="4.5" fill="#fff" opacity=".5"/>';
 
 /* scenes */
-function artZoom(){
-  const Tl=[{n:'Aiko',a:0},{n:'Farhan',a:9,sp:1},{n:'Minh',a:1},{n:'Siti',a:4},{n:'Kamu',a:2,you:1},{n:'Paolo',a:7}];
+function artRoom(){
+  const aud=[{n:'Aiko',a:0},{n:'Kamu',a:2,you:1},{n:'Minh',a:1},{n:'Siti',a:4},{n:'Paolo',a:7}];
   const nm=`<span class="nmA a" style="--k:hide;--t:5.4s;--d:.5s">Farhan</span><span class="a" style="--k:fade;--t:5.8s;--d:.6s">…siapa?</span>`;
-  return `<div class="zoom">${Tl.map((x,i)=>`<div class="tile a${x.sp?' sp':''}${x.you?' you':''}" style="--t:${(.15+i*.12).toFixed(2)}s">${face(x.a)}<span class="tag">${x.sp?nm:x.n}</span>${x.sp?'<span class="talk" aria-hidden="true"><i></i><i></i><i></i></span>':''}</div>`).join('')}
+  return `<div class="room">
+  <div class="think a" style="--k:pop;--t:2s"><i class="ln a ol" style="--k:growX;--t:2.4s">Namaku…</i><i class="ln a ol" style="--k:growX;--t:3s">Aku dari…</i><i class="ln a ol" style="--k:growX;--t:3.6s">Hobiku…</i></div>
+  <div class="pres a" style="--t:.15s"><span class="pspot" aria-hidden="true"></span>${face(9)}<span class="tag">${nm}</span><span class="talk" aria-hidden="true"><i></i><i></i><i></i></span></div>
   <div class="say a" style="--k:pop;--t:1.1s"><span class="sayn"><span class="nmA a" style="--k:hide;--t:5.4s;--d:.5s">Hai! Aku Farhan, dari Dhaka.</span><span class="a" style="--k:fade;--t:5.8s;--d:.6s">Hai! Aku <b class="q">…</b>, dari Dhaka.</span></span></div>
-  <div class="think a" style="--k:pop;--t:2s"><i class="ln a ol" style="--k:growX;--t:2.4s">Namaku…</i><i class="ln a ol" style="--k:growX;--t:3s">Aku dari…</i><i class="ln a ol" style="--k:growX;--t:3.6s">Hobiku…</i></div></div>`;
+  <div class="floor" aria-hidden="true"></div>
+  <div class="aud">${aud.map((x,k)=>`<div class="rs a${x.you?' you':''}" style="--t:${(.35+k*.1).toFixed(2)}s">${face(x.a)}<b>${x.n}</b></div>`).join('')}</div>
+</div>`;
 }
 function artQueue(){
   const sp=[{n:'Aiko',a:0,c:38},{n:'Minh',a:1,c:106},{n:'Siti',a:4,c:174},{n:'Farhan',a:9,c:242}],slots=[[210,52],[306,52],[210,92],[306,92]];
@@ -684,22 +789,22 @@ function artTools(){const L=['K','R','P','T','M','B'];
   <div class="tool a" style="--t:.25s"><b>Lembar recall nama</b><div class="sheet">${['n−4','n−3','n−2','n−1'].map(h=>`<span class="h">${h}</span>`).join('')}${['Aiko','Minh','Siti','?'].map((n,i)=>`<span class="a" style="--k:fade;--t:${(1.2+i*.45).toFixed(2)}s">${n}</span>`).join('')}</div><small>4 kolom, tanpa bantuan</small></div>
   <div class="tool a" style="--t:.4s"><b>SIAS</b><div class="sias"><i class="lim"></i><i class="mk a" style="--k:slide;--t:1s;--d:1.3s"></i></div><small class="a" style="--k:fade;--t:2.3s">Skor di bawah batas: lolos penyaringan</small></div>
   <div class="tool a" style="--t:.55s"><b>Timer dan kamera</b><div class="tc"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" fill="none" stroke="rgba(35,37,58,.08)" stroke-width="7"/><circle cx="30" cy="30" r="24" fill="none" stroke="#f2643f" stroke-width="7" stroke-linecap="round" stroke-dasharray="151" stroke-dashoffset="100" class="a" style="--k:tick;--t:1s;--d:2.4s"/></svg><span class="rec"><i></i>REC</span></div><small>±30 detik per peserta</small></div></div>`}
-const FLOW=[['Perkenalan penelitian','Salam pembuka, kamera menyala, informed consent, aturan Zoom.'],['Pembagian kondisi','Urutan diundi acak: 1–4 pasca-tampil, 5–10 pra-tampil.'],['Presentasi pertama','Urutan 1–4 tampil ±30 detik, urutan 5–10 menunggu.'],['Presentasi kedua','Urutan 5–10 tampil sampai semua giliran selesai.'],['Tes mengingat nama','Menyebutkan 4 nama target tanpa bantuan apa pun.'],['Wawancara','Menggali pengaruh persiapan presentasi dan faktor lain.']];
+const FLOW=[['Perkenalan penelitian','Salam pembuka, informed consent, dan aturan selama sesi.'],['Pembagian kondisi','Urutan diundi acak: 1–4 pasca-tampil, 5–10 pra-tampil.'],['Presentasi pertama','Urutan 1–4 tampil ±30 detik, urutan 5–10 menunggu.'],['Presentasi kedua','Urutan 5–10 tampil sampai semua giliran selesai.'],['Tes mengingat nama','Menyebutkan 4 nama target tanpa bantuan apa pun.'],['Wawancara','Menggali pengaruh persiapan presentasi dan faktor lain.']];
 function artFlow(){return `<ol class="flow">${FLOW.map((f,i)=>`<li class="a" style="--t:${(.15+i*.3).toFixed(2)}s"><span class="nd a" style="--k:pop;--t:${(.3+i*.3).toFixed(2)}s">${i+1}</span><span><b>${f[0]}</b><span>${f[1]}</span></span></li>`).join('')}</ol>`}
 function artCTA(){return `<div class="cta"><div class="mini">${Array.from({length:10},(_,i)=>`<span class="ms a${i>=5?' pr':''}" style="--k:pop;--t:${(.1+i*.08).toFixed(2)}s">${face(i)}<b>#${i+1}</b></span>`).join('')}</div><span class="spark s1">✦</span><span class="spark s2">✦</span><span class="spark s3">✦</span></div>`}
 
 const SC=[
- {n:'01',l:'Pembuka',g:'violet',t:'Pernahkah kamu lupa apa yang baru saja dipresentasikan temanmu karena sibuk mempersiapkan giliranmu sendiri?',hook:1,art:artZoom,b:''},
+ {n:'01',l:'Pembuka',g:'violet',t:'Pernahkah kamu lupa apa yang baru saja dipresentasikan temanmu karena sibuk mempersiapkan giliranmu sendiri?',hook:1,art:artRoom,b:''},
  {n:'02',l:'Next-in-line effect',g:'blue',t:'Orang yang tampil tepat sebelum giliranmu paling mudah terlupakan',art:artQueue,b:'<p>Saat menunggu giliran dalam satu urutan, daya ingat kita terhadap pembicara tepat sebelum kita melemah. Makin dekat ke giliran sendiri, makin sedikit yang terekam.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
  {n:'03',l:'Antisipasi performa',g:'coral',t:'Penyebab 1: memori kerja penuh dengan persiapan diri sendiri',art:artAnt,b:'<p>Saat bersiap tampil, sebagian besar kapasitas perhatian dan memori kerja dipakai untuk menyusun kalimat dan melatih perkenalan dalam hati. Informasi dari pembicara lain jadi tidak ter-encode dengan baik.</p><p>Kondisi bersiap ini saja sudah cukup menurunkan ingatan, bahkan tanpa rasa cemas yang berat.</p>',src:'Forrin &amp; MacLeod (2019)'},
  {n:'04',l:'Perhatian ke diri sendiri',g:'violet',t:'Penyebab 2: dari menyimak orang lain, jadi sibuk memikirkan diri sendiri',art:artSelf,b:'<p>Menjelang tampil, perhatian bergeser dari lingkungan luar ke dalam diri (<i>self-focused attention</i>): menyiapkan penampilan sambil mengelola ketegangan karena akan dinilai orang lain.</p><p>Akibatnya, identitas dan informasi dari pembicara sebelumnya sulit terserap.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
  {n:'05',l:'Teori atenuasi',g:'blue',t:'Penyebab 3: nama yang baru didengar kalah sebelum sempat dikenali',art:artAtt,b:'<p>Menurut teori atenuasi, informasi yang tidak sedang difokuskan tidak diblokir, tapi sinyalnya diperlemah sebelum diproses maknanya.</p><p>Di kamus mental (<i>dictionary unit</i>), kata yang akrab punya ambang aktivasi rendah, sedangkan nama asing yang baru pertama kali didengar butuh sinyal penuh. Saat perhatian terpecah, nama peserta lain gagal melewati ambang itu, jadi tidak tersimpan untuk diingat kembali.</p>',src:'Treisman (1964)'},
  {n:'06',l:'Setelah tampil',g:'teal',t:'Begitu giliran selesai, perhatian kembali pulih',art:artAfter,b:'<p>Beban antisipasi dan fokus pada diri sendiri mereda. Kapasitas perhatian bisa dipakai lagi untuk menyerap dan mengingat nama pembicara berikutnya dengan lebih akurat.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
  {n:'07',l:'Hipotesis',g:'violet',t:'Apakah menunggu giliran tampil membuat kita lebih sulit mengingat nama?',art:artHyp,b:'<div class="hy"><b>H₀</b><span>Tidak ada perbedaan akurasi recall nama antara peserta pra-tampil dan pasca-tampil.</span></div><div class="hy h1"><b>H₁</b><span>Peserta pra-tampil memiliki akurasi recall nama yang lebih rendah daripada peserta pasca-tampil.</span></div>'},
- {n:'08',l:'Desain eksperimen',g:'blue',t:'Urutan tampil menentukan siapa yang harus diingat',art:artDesign,b:'<p>Sepuluh peserta memperkenalkan diri bergiliran selama sekitar 30 detik. Mereka tidak diberi tahu bahwa nanti ada tes mengingat nama.</p><div class="vars"><div class="var"><b>Variabel bebas: antisipasi performa</b>Pra-tampil (urutan 5–10) mengingat 4 orang yang tampil tepat sebelum gilirannya. Pasca-tampil (urutan 1–4) mengingat 4 orang yang tampil tepat setelah mereka.</div><div class="var"><b>Variabel terikat: akurasi recall nama</b>Proporsi nama yang diingat tepat sesuai identitasnya.</div></div>'},
- {n:'09',l:'Partisipan',g:'teal',t:'100 peserta dari berbagai negara di Asia yang belum saling kenal',art:artSample,b:'<p>Penelitian berlangsung lima hari, dua sesi per hari. Setiap sesi berisi 10 peserta yang urutannya diundi acak: urutan 1–4 pasca-tampil, urutan 5–10 pra-tampil.</p><div class="crit"><b>Bisa ikut</b><span class="cp ok">Usia 18–25 tahun</span><span class="cp ok">Mampu berbahasa Inggris</span></div><div class="crit"><b>Tidak diikutkan</b><span class="cp no">Sudah saling kenal</span><span class="cp no">Gangguan pendengaran</span><span class="cp no">Kecemasan sosial tinggi</span></div>'},
+ {n:'08',l:'Desain eksperimen',g:'blue',t:'Urutan tampil menentukan siapa yang harus diingat',art:artDesign,b:'<p>Sepuluh peserta memperkenalkan diri secara tatap muka, bergiliran selama sekitar 30 detik. Mereka tidak diberi tahu bahwa nanti ada tes mengingat nama.</p><div class="vars"><div class="var"><b>Variabel bebas: antisipasi performa</b>Pra-tampil (urutan 5–10) mengingat 4 orang yang tampil tepat sebelum gilirannya. Pasca-tampil (urutan 1–4) mengingat 4 orang yang tampil tepat setelah mereka.</div><div class="var"><b>Variabel terikat: akurasi recall nama</b>Proporsi nama yang diingat tepat sesuai identitasnya.</div></div>'},
+ {n:'09',l:'Partisipan',g:'teal',t:'100 peserta dari berbagai negara di Asia yang belum saling kenal',art:artSample,b:'<p>Penelitian berlangsung lima hari, dua sesi tatap muka per hari. Setiap sesi berisi 10 peserta yang urutannya diundi acak: urutan 1–4 pasca-tampil, urutan 5–10 pra-tampil.</p><div class="crit"><b>Bisa ikut</b><span class="cp ok">Usia 18–25 tahun</span><span class="cp ok">Mampu berbahasa Inggris</span></div><div class="crit"><b>Tidak diikutkan</b><span class="cp no">Sudah saling kenal</span><span class="cp no">Gangguan pendengaran</span><span class="cp no">Kecemasan sosial tinggi</span></div>'},
  {n:'10',l:'Alat ukur',g:'coral',t:'Empat alat untuk menjaga eksperimen tetap adil',art:artTools,b:'<ul class="ul"><li><b>Letter Memory Task</b> memastikan kapasitas dasar memori kerja kedua kelompok setara sebelum perlakuan.</li><li><b>Lembar recall nama</b> mencatat 4 nama target: n−4 sampai n−1 untuk pra-tampil, n+1 sampai n+4 untuk pasca-tampil.</li><li><b>SIAS</b> menyaring calon peserta dengan kecemasan sosial tinggi.</li><li><b>Timer dan kamera</b> menyeragamkan durasi presentasi.</li></ul>'},
- {n:'11',l:'Prosedur',g:'blue',t:'Enam langkah dalam satu sesi Zoom',art:artFlow,b:'<p>Semua langkah dijalankan dengan naskah dan durasi yang sama untuk setiap sesi, supaya perbedaan hasil benar-benar datang dari urutan tampil.</p>'},
+ {n:'11',l:'Prosedur',g:'blue',t:'Enam langkah dalam satu sesi tatap muka',art:artFlow,b:'<p>Semua langkah dijalankan dengan naskah dan durasi yang sama untuk setiap sesi, supaya perbedaan hasil benar-benar datang dari urutan tampil.</p>'},
  {n:'12',l:'Simulasi',g:'violet',t:'Sekarang coba jalankan eksperimennya',art:artCTA,b:'<p>Simulasi mengikuti alur yang sama, langkah demi langkah. Kamu bisa mengisi data sendiri, atau langsung melihat contoh hasilnya.</p><div class="row" style="margin-top:6px"><button type="button" class="btn pri big" data-act="mode" data-m="simulasi" id="bOpenSim">Buka simulasi</button><button type="button" class="btn" data-act="demoResult" id="bDemo">Lihat contoh hasil</button></div>'}
 ];
 
@@ -822,8 +927,8 @@ function pOpen(){const s=S.sess,ck=s.check,started=s.pres.some(r=>r&&r.s),bad=s.
   if(!s.order)right=`<div class="drawbox"><p>Urutan tampil diundi acak supaya kondisi tidak ditentukan oleh sifat peserta.</p><button type="button" class="btn pri big" data-act="draw" id="bDraw">✦ Undi urutan</button></div>`;
   else{const L=pos=>{const p=atPos(s,pos);return `<li>${face(p.av)}<span>#${pos} ${esc(p.name)}</span><small>ingat ${targets(pos).map(t=>'#'+t).join(' ')}</small></li>`};
     right=`<div class="grps"><div class="grp pasca"><h3>Pasca-tampil, urutan 1–4</h3><p>Tampil dulu, lalu menyimak 4 orang berikutnya.</p><ol>${[1,2,3,4].map(L).join('')}</ol></div><div class="grp pra"><h3>Pra-tampil, urutan 5–10</h3><p>Menyimak 4 orang sebelum giliran.</p><ol>${[5,6,7,8,9,10].map(L).join('')}</ol></div></div><div class="row" style="margin-top:14px">${started?'<span class="small mut">Presentasi sudah dimulai, jadi urutan dikunci.</span>':'<button type="button" class="btn" data-act="draw" id="bDraw">Undi ulang</button>'}<button type="button" class="btn pri" data-act="step" data-i="2">Lanjut ke presentasi →</button></div>`}
-  return phd('2. Pembukaan dan undi urutan','Buka sesi Zoom, lalu undi urutan tampil. Urutan 1–4 menjadi pasca-tampil dan urutan 5–10 pra-tampil.')+(bad.length?`<p class="warn">${bad.length} peserta belum lolos penyaringan: ${bad.map(p=>esc(p.name)).join(', ')}.</p>`:'')+
-  `<div class="cols l"><div class="glass card"><h3>Perkenalan penelitian</h3>${row('cam','Kamera semua peserta menyala','Diminta saat salam pembuka')}${row('consent','Informed consent disetujui','Dijelaskan sebelum mulai')}${row('rules','Aturan Zoom dijelaskan','Termasuk durasi ±30 detik')}<blockquote class="script">"Welcome, and thank you for joining. Please keep your camera on for the whole session. Each of you will introduce yourself for about 30 seconds."</blockquote><p class="small mut" style="margin:10px 0 0">Jangan sebut bahwa nanti ada tes mengingat nama.</p></div><div class="glass card"><h3>Pembagian kondisi</h3>${right}</div></div>`}
+  return phd('2. Pembukaan dan undi urutan','Buka sesi tatap muka, lalu undi urutan tampil. Urutan 1–4 menjadi pasca-tampil dan urutan 5–10 pra-tampil.')+(bad.length?`<p class="warn">${bad.length} peserta belum lolos penyaringan: ${bad.map(p=>esc(p.name)).join(', ')}.</p>`:'')+
+  `<div class="cols l"><div class="glass card"><h3>Perkenalan penelitian</h3>${row('cam','Kamera perekam menyala','Merekam semua presentasi')}${row('consent','Informed consent disetujui','Dijelaskan sebelum mulai')}${row('rules','Aturan sesi dijelaskan','Termasuk durasi ±30 detik')}<blockquote class="script">"Welcome, and thank you for coming. Each of you will introduce yourself to the group, one by one, for about 30 seconds."</blockquote><p class="small mut" style="margin:10px 0 0">Jangan sebut bahwa nanti ada tes mengingat nama.</p></div><div class="glass card"><h3>Pembagian kondisi</h3>${right}</div></div>`}
 
 function pPres(){const s=S.sess,h=phd('3. Presentasi','Setiap peserta memperkenalkan diri sekitar 30 detik. Waktu mulai dan selesai tercatat otomatis.');if(!s.order)return needOrder(h);
   const i=s.cur,q=s.order.map((id,k)=>{const r=s.pres[k],st=r&&r.e?Math.round((r.e-r.s)/1000)+' dtk':k===i&&r&&r.s?'Tampil':'Menunggu';return `${k===4?'<li class="blkh">Blok 2: pra-tampil</li>':''}<li class="${k===i?'now':''}"><span class="pn">#${k+1}</span><span>${esc(P(s,id).name)}</span><i class="dot ${cond(k+1)}"></i><span class="small ${r&&r.e?'':'mut'}">${st}</span></li>`}).join('');
