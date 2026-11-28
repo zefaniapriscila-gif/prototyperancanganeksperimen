@@ -627,6 +627,21 @@ body{font-size:15.5px;line-height:1.65}
 .gspot{width:calc((100% - 48px) / 5)}
 .gcap{margin-top:22px;font-size:18px}
 }
+
+/* phone: opening fills the screen, card stretches to the bottom */
+@media(max-width:600px){
+.gate{min-height:calc(100svh - 62px);display:flex;flex-direction:column;padding:14px 0 calc(20px + env(safe-area-inset-bottom,0px))}
+.gwrap{flex:1;display:flex;flex-direction:column}
+.gvis{flex:1;display:flex;flex-direction:column;min-height:300px}
+.gvis .ghead{align-self:flex-start}
+.gwrap{gap:clamp(18px,3.2svh,30px)}
+.gtext p{margin-bottom:clamp(16px,2.6svh,26px)}
+.gq{margin:auto 0;padding:48px 0 14px}
+.gs{padding:12px 3px 12px;gap:6px}
+.gs svg{max-width:56px}
+.gs b,.gs small{font-size:13px}
+.gcap{margin-top:0;font-size:14.5px}
+}
 </style>
 </head>
 <body>
