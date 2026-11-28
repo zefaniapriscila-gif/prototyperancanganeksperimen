@@ -967,7 +967,7 @@ const tog=(p,k,l)=>`<button type="button" class="tg${p[k]?' on':''}" data-act="t
 const badge=st=>`<span class="badge st-${st.k}">${st.k==='ok'?'Lolos':st.k==='gagal'?'Tidak lolos':'Belum lengkap'}</span>`;
 
 function pPeserta(){const s=S.sess,ok=s.ps.filter(p=>status(p).k==='ok').length;
-  return phd('1. Peserta',`Calon peserta disaring dulu, lalu kapasitas memori kerjanya diukur dengan Letter Memory Task. <b id="okCount">${ok}</b> dari 10 peserta lolos.`)+`<div class="pcards">${s.ps.map((p,i)=>{const st=status(p);return `<div class="pc glass"><div class="pch">${face(p.av)}<input id="nm-${esc(p.id)}" value="${esc(p.name)}" data-f="p.name" data-pid="${esc(p.id)}" aria-label="Nama peserta ${i+1}" autocomplete="off"><span id="bd-${esc(p.id)}">${badge(st)}</span></div>
+  return phd('1. Peserta',`Calon peserta disaring dulu, lalu kapasitas memori kerjanya diukur dengan Letter Memory Task. Nama peserta bisa diganti langsung di kolom nama. <b id="okCount">${ok}</b> dari 10 peserta lolos.`)+`<div class="pcards">${s.ps.map((p,i)=>{const st=status(p);return `<div class="pc glass"><div class="pch">${face(p.av)}<input id="nm-${esc(p.id)}" value="${esc(p.name)}" data-f="p.name" data-pid="${esc(p.id)}" aria-label="Nama peserta ${i+1}" autocomplete="off"><span id="bd-${esc(p.id)}">${badge(st)}</span></div>
   <div class="pcn"><label>Usia<input id="ag-${esc(p.id)}" type="number" inputmode="numeric" value="${esc(p.age??'')}" data-f="p.age" data-pid="${esc(p.id)}"></label><label>Skor SIAS<input id="si-${esc(p.id)}" type="number" inputmode="numeric" value="${esc(p.sias??'')}" data-f="p.sias" data-pid="${esc(p.id)}"></label><label>LMT (%)<input id="lm-${esc(p.id)}" type="number" inputmode="numeric" value="${p.lmt==null?'':Math.round(p.lmt*100)}" data-f="p.lmt" data-pid="${esc(p.id)}"></label></div>
   <div class="tgl">${tog(p,'eng','Bisa bahasa Inggris')}${tog(p,'stranger','Belum saling kenal')}${tog(p,'hearing','Pendengaran baik')}<button type="button" class="tg lmtb" data-act="lmt" data-pid="${esc(p.id)}" id="lmb-${esc(p.id)}">▶ Coba LMT</button></div>
   <p class="why" id="why-${esc(p.id)}">${st.k==='ok'?'':esc(st.t)}</p></div>`}).join('')}</div>
@@ -1126,7 +1126,7 @@ const ACT={
   iv:b=>{const s=S.sess,o=s.iv[b.dataset.pid]||(s.iv[b.dataset.pid]={}),k=b.dataset.k;o[k]=k==='focus'?+b.dataset.v:b.dataset.v;commit()},
   fill:()=>{const s=S.sess;[()=>simScreen(s),()=>simOpen(s),()=>{s.recall={};simPres(s)},()=>simRecall(s),()=>{if(!s.order)simOpen(s);simIv(s)}][S.step]?.();s.sim=true;commit();toast('Langkah ini diisi data contoh')},
   simAll:()=>{simEverything(S.sess);S.view='sesi';goStep(5);toast('Semua langkah diisi data contoh')},
-  reset:()=>{S.sess=blankSess(Array.from({length:10},(_,i)=>'Peserta '+(i+1)));S.sel=null;S.view='sesi';goStep(0);toast('Sesi baru siap diisi')},
+  reset:()=>{S.sess=blankSess(POOL.slice(0,10));S.sel=null;S.view='sesi';goStep(0);toast('Sesi baru siap diisi')},
   view:b=>{if(b.dataset.v==='grup'&&!S.groups.length){ACT.mkGroups();return}S.view=b.dataset.v;commit()},
   scen:b=>{S.scen=b.dataset.v;commit()},
   mkGroups:()=>{S.groups=Array.from({length:10},()=>{const avs=shuffle([...Array(40).keys()]).slice(0,10),g=blankSess(avs.map(i=>POOL[i]),avs);simEverything(g);return g});S.view='grup';commit();toast('100 peserta simulasi dibuat')},
@@ -1161,7 +1161,7 @@ setInterval(tick,250);
 /* boot */
 const validP=p=>p&&typeof p.id==='string';
 const validSess=s=>s&&Array.isArray(s.ps)&&s.ps.length===10&&s.ps.every(validP);
-function fixSess(s){const b=blankSess([]);for(const k of ['check','recall','iv'])if(!s[k]||typeof s[k]!=='object')s[k]=b[k];if(!Array.isArray(s.pres))s.pres=[];s.cur=+s.cur||0;s.ps.forEach((p,i)=>{p.name=String(p.name??'');p.av=Number.isInteger(p.av)?p.av:i;for(const k of ['eng','stranger','hearing'])if(typeof p[k]!=='boolean')p[k]=true});if(s.order&&(!Array.isArray(s.order)||s.order.length!==10||!s.order.every(id=>s.ps.some(p=>p.id===id))))s.order=null;return s}
+function fixSess(s){const b=blankSess([]);for(const k of ['check','recall','iv'])if(!s[k]||typeof s[k]!=='object')s[k]=b[k];if(!Array.isArray(s.pres))s.pres=[];s.cur=+s.cur||0;s.ps.forEach((p,i)=>{p.name=String(p.name??'');if(/^Peserta \d+$/.test(p.name))p.name=POOL[i];p.av=Number.isInteger(p.av)?p.av:i;for(const k of ['eng','stranger','hearing'])if(typeof p[k]!=='boolean')p[k]=true});if(s.order&&(!Array.isArray(s.order)||s.order.length!==10||!s.order.every(id=>s.ps.some(p=>p.id===id))))s.order=null;return s}
 function start(data){let st=data&&validSess(data.sess)?data:null;if(!st){const l=load();if(l&&validSess(l.sess))st=l}
   S=Object.assign(initState(),st||{});S.sess=fixSess(S.sess);S.groups=Array.isArray(S.groups)?S.groups.filter(validSess).map(fixSess):[];
   S.scene=clamp(+S.scene||0,0,SC.length-1);S.step=clamp(+S.step||0,0,5);
