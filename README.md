@@ -8,8 +8,9 @@ Semuanya ada di satu file, `index.html`, tanpa instalasi apa pun. Tampilannya me
 
 - **Satu sesi:** 10 peserta yang belum saling kenal memperkenalkan diri secara tatap muka, bergiliran sekitar 30 detik. Urutan tampil diundi acak.
 - **Variabel bebas:** antisipasi performa.
-  - Pra-tampil (urutan 5–10): mengingat 4 orang yang tampil tepat sebelum gilirannya (n−4 sampai n−1).
-  - Pasca-tampil (urutan 1–4): mengingat 4 orang yang tampil tepat setelah mereka (n+1 sampai n+4).
+  - Pra-tampil (urutan 6–10): mengingat 4 orang yang tampil tepat sebelum gilirannya (n−4 sampai n−1).
+  - Pasca-tampil (urutan 1–5): mengingat 4 orang yang tampil tepat setelah mereka (n+1 sampai n+4).
+- **Partisipan:** 100 orang, 5 hari × 2 sesi × 10 orang; tiap sesi 5 pasca-tampil dan 5 pra-tampil.
 - **Variabel terikat:** akurasi recall nama, yaitu proporsi nama yang tepat sesuai identitasnya.
 - **H₁:** akurasi recall kelompok pra-tampil lebih rendah daripada pasca-tampil.
 

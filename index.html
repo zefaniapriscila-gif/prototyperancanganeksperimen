@@ -319,7 +319,7 @@ textarea{font-size:14px}
 .striphd b{font-size:16px}
 .strip{position:relative;padding-top:56px;min-width:700px}
 #arcs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
-.seats,.blocks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) 16px repeat(6,minmax(0,1fr));gap:6px}
+.seats,.blocks{display:grid;grid-template-columns:repeat(5,minmax(0,1fr)) 16px repeat(5,minmax(0,1fr));gap:6px}
 .seat{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px 15px;border:1px solid var(--edge);border-radius:16px;background:rgba(255,255,255,.8);font:inherit;color:var(--ink);cursor:pointer;transition:opacity .25s}
 .seat svg{width:48px;height:48px;border-radius:50%}
 .seat .pos{font-size:13px;color:var(--mut);font-weight:700;line-height:1.3}
@@ -334,8 +334,8 @@ textarea{font-size:14px}
 .seat.dim{opacity:.42}
 .blk{width:2px;justify-self:center;background:rgba(35,37,58,.14);border-radius:1px}
 .blocks{margin-top:8px;font-size:13px;color:var(--mut)}
-.blocks span:first-child{grid-column:1/5}
-.blocks span:last-child{grid-column:6/12}
+.blocks span:first-child{grid-column:1/6}
+.blocks span:last-child{grid-column:7/12}
 .phd{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:flex-end;justify-content:space-between;margin:4px 0 16px}
 .phd h2{font-size:28px;line-height:1.15}
 .phd p{margin:6px 0 0;color:var(--mut);max-width:66ch}
@@ -590,6 +590,25 @@ body{font-size:15.5px;line-height:1.65}
 .day b{font-size:13px;white-space:nowrap}
 .day small{display:none}
 }
+
+/* phone: opening page fits in one screen */
+@media(max-width:600px){
+.gate{padding:14px 0 28px;align-items:start}
+.gwrap{gap:18px}
+.gtext .kick{display:none}
+.gtext h1{font-size:31px;margin-bottom:8px}
+.gtext p{font-size:14.5px;line-height:1.55;margin-bottom:16px}
+#bGateSim{display:none}
+.gtext .btn.big{min-height:48px;font-size:15.5px}
+.gvis{padding:14px 12px 14px;border-radius:22px}
+.ghead{font-size:12px;padding:5px 10px}
+.gq{margin-top:40px;gap:6px}
+.gs{padding:8px 2px 9px;gap:4px;border-radius:14px}
+.gs svg{max-width:42px}
+.gs b,.gs small{font-size:12px}
+.gthink{top:-38px;padding:7px 11px}
+.gcap{margin-top:10px;font-size:13.5px}
+}
 </style>
 </head>
 <body>
@@ -630,7 +649,7 @@ body{font-size:15.5px;line-height:1.65}
     <div class="row"><button type="button" class="btn pri" data-act="simAll" id="bSimAll">✦ Lihat contoh hasil</button><button type="button" class="btn" data-act="reset" data-confirm id="bReset">Mulai ulang</button></div>
   </section>
   <nav class="wrap scroll" aria-label="Langkah simulasi"><div class="steps" id="steps"></div></nav>
-  <section class="wrap" id="stripWrap"><div class="glass stripc"><div class="striphd"><b>Antrean perkenalan</b><span class="mut" id="stripNote"></span></div><div class="scroll"><div class="strip" id="strip"><svg id="arcs" aria-hidden="true"></svg><div class="seats" id="seats"></div><div class="blocks" id="blocks"><span>Blok 1: urutan 1–4, pasca-tampil</span><span>Blok 2: urutan 5–10, pra-tampil</span></div></div></div></div></section>
+  <section class="wrap" id="stripWrap"><div class="glass stripc"><div class="striphd"><b>Antrean perkenalan</b><span class="mut" id="stripNote"></span></div><div class="scroll"><div class="strip" id="strip"><svg id="arcs" aria-hidden="true"></svg><div class="seats" id="seats"></div><div class="blocks" id="blocks"><span>Blok 1: urutan 1–5, pasca-tampil</span><span>Blok 2: urutan 6–10, pra-tampil</span></div></div></div></div></section>
   <section class="wrap" id="panel"></section>
 </main>
 
@@ -773,23 +792,23 @@ function artAfter(){
 }
 function artHyp(){return `<div class="hyp"><div class="hcol">${face(2)}<div class="hbox"><div class="hbar pra a ob" style="--k:growY;--t:.5s;--d:1.2s;height:36%"></div></div><b>Pra-tampil</b><span>menunggu giliran</span></div><div class="hsign a" style="--k:pop;--t:1.9s">&lt;</div><div class="hcol">${face(5)}<div class="hbox"><div class="hbar pasca a ob" style="--k:growY;--t:.9s;--d:1.2s;height:68%"></div></div><b>Pasca-tampil</b><span>sudah tampil</span></div></div><p class="cap">Ilustrasi arah prediksi H₁, bukan data.</p>`}
 function artDesign(){
-  const cx=p=>p<=4?24+(p-1)*40:200+(p-5)*40;
-  let g='<rect x="4" y="138" width="160" height="128" rx="22" fill="rgba(212,229,255,.85)"/><rect x="180" y="138" width="236" height="128" rx="22" fill="rgba(255,216,201,.8)"/>';
+  const cx=p=>p<=5?24+(p-1)*40:236+(p-6)*40;
+  let g='<rect x="4" y="138" width="200" height="128" rx="22" fill="rgba(212,229,255,.85)"/><rect x="216" y="138" width="200" height="128" rx="22" fill="rgba(255,216,201,.8)"/>';
   for(let p=1;p<=10;p++)g+=fa(p-1,cx(p)-17,152,34)+T(cx(p),210,'#'+p,{a:'middle',fw:800,fs:16});
-  g+=T(84,250,'Pasca-tampil',{a:'middle',fw:800,c:'#1d5fae'})+T(298,250,'Pra-tampil',{a:'middle',fw:800,c:'#b83d1f'});
+  g+=T(104,250,'Pasca-tampil',{a:'middle',fw:800,c:'#1d5fae'})+T(316,250,'Pra-tampil',{a:'middle',fw:800,c:'#b83d1f'});
   const arc=(a,b,col,t)=>{const x1=cx(a),x2=cx(b),y=148,h=Math.min(104,18+Math.abs(x2-x1)*.33);return `<path class="a dr" d="M${x1} ${y}C${x1} ${y-h} ${x2} ${y-h} ${x2} ${y}" fill="none" stroke="${col}" stroke-width="3" stroke-linecap="round" style="--k:draw;--t:${t.toFixed(2)}s;--d:.8s"/><circle cx="${x2}" cy="${y}" r="5" fill="${col}" class="a" style="--k:pop;--t:${(t+.6).toFixed(2)}s"/>`};
   [4,5,6,7].forEach((b,i)=>g+=arc(8,b,'#f2643f',.6+i*.15));
   [3,4,5,6].forEach((b,i)=>g+=arc(2,b,'#3b8de8',2.3+i*.15));
   g+=T(8,22,'#2 mengingat #3–#6',{fw:800,c:'#1d5fae',cls:'a',st:'--k:fade;--t:2.3s'})+T(412,22,'#8 mengingat #4–#7',{a:'end',fw:800,c:'#b83d1f',cls:'a',st:'--k:fade;--t:.6s'});
-  return sv(420,268,g,'Sepuluh peserta. Urutan 1 sampai 4 pasca-tampil, 5 sampai 10 pra-tampil. Peserta 8 mengingat 4 sampai 7, peserta 2 mengingat 3 sampai 6.');
+  return sv(420,268,g,'Sepuluh peserta. Urutan 1 sampai 5 pasca-tampil, 6 sampai 10 pra-tampil. Peserta 8 mengingat 4 sampai 7, peserta 2 mengingat 3 sampai 6.');
 }
-function artSample(){return `<div class="days">${[1,2,3,4,5].map(d=>`<div class="day a" style="--t:${((d-1)*.12).toFixed(2)}s"><div class="dg">${Array.from({length:20},(_,i)=>`<i class="a${i%10<4?' b':''}" style="--k:pop;--d:.4s;--t:${((d-1)*.3+.3+i*.025).toFixed(3)}s${i>=10&&i<15?';margin-top:6px':''}"></i>`).join('')}</div><b>Hari ${d}</b><small>2 sesi × 10 orang</small></div>`).join('')}</div><div class="lg"><span><i class="dot pasca"></i>4 pasca-tampil</span><span><i class="dot pra"></i>6 pra-tampil</span><span class="mut">per sesi</span></div>`}
+function artSample(){return `<div class="days">${[1,2,3,4,5].map(d=>`<div class="day a" style="--t:${((d-1)*.12).toFixed(2)}s"><div class="dg">${Array.from({length:20},(_,i)=>`<i class="a${i%10<5?' b':''}" style="--k:pop;--d:.4s;--t:${((d-1)*.3+.3+i*.025).toFixed(3)}s${i>=10&&i<15?';margin-top:6px':''}"></i>`).join('')}</div><b>Hari ${d}</b><small>2 sesi × 10 orang</small></div>`).join('')}</div><div class="lg"><span><i class="dot pasca"></i>5 pasca-tampil</span><span><i class="dot pra"></i>5 pra-tampil</span><span class="mut">per sesi</span></div>`}
 function artTools(){const L=['K','R','P','T','M','B'];
   return `<div class="tools"><div class="tool a" style="--t:.1s"><b>Letter Memory Task</b><div class="letters">${L.map((c,i)=>`<span class="a${i>=2?' hl':''}" style="--k:pop;--t:${(.4+i*.35).toFixed(2)}s">${c}</span>`).join('')}</div><small>Sebutkan 4 huruf terakhir</small></div>
   <div class="tool a" style="--t:.25s"><b>Lembar recall nama</b><div class="sheet">${['n−4','n−3','n−2','n−1'].map(h=>`<span class="h">${h}</span>`).join('')}${['Aiko','Minh','Siti','?'].map((n,i)=>`<span class="a" style="--k:fade;--t:${(1.2+i*.45).toFixed(2)}s">${n}</span>`).join('')}</div><small>4 kolom, tanpa bantuan</small></div>
   <div class="tool a" style="--t:.4s"><b>SIAS</b><div class="sias"><i class="lim"></i><i class="mk a" style="--k:slide;--t:1s;--d:1.3s"></i></div><small class="a" style="--k:fade;--t:2.3s">Skor di bawah batas: lolos penyaringan</small></div>
   <div class="tool a" style="--t:.55s"><b>Timer dan kamera</b><div class="tc"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24" fill="none" stroke="rgba(35,37,58,.08)" stroke-width="7"/><circle cx="30" cy="30" r="24" fill="none" stroke="#f2643f" stroke-width="7" stroke-linecap="round" stroke-dasharray="151" stroke-dashoffset="100" class="a" style="--k:tick;--t:1s;--d:2.4s"/></svg><span class="rec"><i></i>REC</span></div><small>±30 detik per peserta</small></div></div>`}
-const FLOW=[['Perkenalan penelitian','Salam pembuka, informed consent, dan aturan selama sesi.'],['Pembagian kondisi','Urutan diundi acak: 1–4 pasca-tampil, 5–10 pra-tampil.'],['Presentasi pertama','Urutan 1–4 tampil ±30 detik, urutan 5–10 menunggu.'],['Presentasi kedua','Urutan 5–10 tampil sampai semua giliran selesai.'],['Tes mengingat nama','Menyebutkan 4 nama target tanpa bantuan apa pun.'],['Wawancara','Menggali pengaruh persiapan presentasi dan faktor lain.']];
+const FLOW=[['Perkenalan penelitian','Salam pembuka, informed consent, dan aturan selama sesi.'],['Pembagian kondisi','Urutan diundi acak: 1–5 pasca-tampil, 6–10 pra-tampil.'],['Presentasi pertama','Urutan 1–5 tampil ±30 detik, urutan 6–10 menunggu.'],['Presentasi kedua','Urutan 6–10 tampil sampai semua giliran selesai.'],['Tes mengingat nama','Menyebutkan 4 nama target tanpa bantuan apa pun.'],['Wawancara','Menggali pengaruh persiapan presentasi dan faktor lain.']];
 function artFlow(){return `<ol class="flow">${FLOW.map((f,i)=>`<li class="a" style="--t:${(.15+i*.3).toFixed(2)}s"><span class="nd a" style="--k:pop;--t:${(.3+i*.3).toFixed(2)}s">${i+1}</span><span><b>${f[0]}</b><span>${f[1]}</span></span></li>`).join('')}</ol>`}
 function artCTA(){return `<div class="cta"><div class="mini">${Array.from({length:10},(_,i)=>`<span class="ms a${i>=5?' pr':''}" style="--k:pop;--t:${(.1+i*.08).toFixed(2)}s">${face(i)}<b>#${i+1}</b></span>`).join('')}</div><span class="spark s1">✦</span><span class="spark s2">✦</span><span class="spark s3">✦</span></div>`}
 
@@ -800,9 +819,9 @@ const SC=[
  {n:'04',l:'Perhatian ke diri sendiri',g:'violet',t:'Penyebab 2: dari menyimak orang lain, jadi sibuk memikirkan diri sendiri',art:artSelf,b:'<p>Menjelang tampil, perhatian bergeser dari lingkungan luar ke dalam diri (<i>self-focused attention</i>): menyiapkan penampilan sambil mengelola ketegangan karena akan dinilai orang lain.</p><p>Akibatnya, identitas dan informasi dari pembicara sebelumnya sulit terserap.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
  {n:'05',l:'Teori atenuasi',g:'blue',t:'Penyebab 3: nama yang baru didengar kalah sebelum sempat dikenali',art:artAtt,b:'<p>Menurut teori atenuasi, informasi yang tidak sedang difokuskan tidak diblokir, tapi sinyalnya diperlemah sebelum diproses maknanya.</p><p>Di kamus mental (<i>dictionary unit</i>), kata yang akrab punya ambang aktivasi rendah, sedangkan nama asing yang baru pertama kali didengar butuh sinyal penuh. Saat perhatian terpecah, nama peserta lain gagal melewati ambang itu, jadi tidak tersimpan untuk diingat kembali.</p>',src:'Treisman (1964)'},
  {n:'06',l:'Setelah tampil',g:'teal',t:'Begitu giliran selesai, perhatian kembali pulih',art:artAfter,b:'<p>Beban antisipasi dan fokus pada diri sendiri mereda. Kapasitas perhatian bisa dipakai lagi untuk menyerap dan mengingat nama pembicara berikutnya dengan lebih akurat.</p>',src:'Brenner (1973); Bond &amp; Omar (1991)'},
- {n:'07',l:'Hipotesis',g:'violet',t:'Apakah menunggu giliran tampil membuat kita lebih sulit mengingat nama?',art:artHyp,b:'<div class="hy"><b>H₀</b><span>Tidak ada perbedaan akurasi recall nama antara peserta pra-tampil dan pasca-tampil.</span></div><div class="hy h1"><b>H₁</b><span>Peserta pra-tampil memiliki akurasi recall nama yang lebih rendah daripada peserta pasca-tampil.</span></div>'},
- {n:'08',l:'Desain eksperimen',g:'blue',t:'Urutan tampil menentukan siapa yang harus diingat',art:artDesign,b:'<p>Sepuluh peserta memperkenalkan diri secara tatap muka, bergiliran selama sekitar 30 detik. Mereka tidak diberi tahu bahwa nanti ada tes mengingat nama.</p><div class="vars"><div class="var"><b>Variabel bebas: antisipasi performa</b>Pra-tampil (urutan 5–10) mengingat 4 orang yang tampil tepat sebelum gilirannya. Pasca-tampil (urutan 1–4) mengingat 4 orang yang tampil tepat setelah mereka.</div><div class="var"><b>Variabel terikat: akurasi recall nama</b>Proporsi nama yang diingat tepat sesuai identitasnya.</div></div>'},
- {n:'09',l:'Partisipan',g:'teal',t:'100 peserta dari berbagai negara di Asia yang belum saling kenal',art:artSample,b:'<p>Penelitian berlangsung lima hari, dua sesi tatap muka per hari. Setiap sesi berisi 10 peserta yang urutannya diundi acak: urutan 1–4 pasca-tampil, urutan 5–10 pra-tampil.</p><div class="crit"><b>Bisa ikut</b><span class="cp ok">Usia 18–25 tahun</span><span class="cp ok">Mampu berbahasa Inggris</span></div><div class="crit"><b>Tidak diikutkan</b><span class="cp no">Sudah saling kenal</span><span class="cp no">Gangguan pendengaran</span><span class="cp no">Kecemasan sosial tinggi</span></div>'},
+ {n:'07',l:'Hipotesis',g:'violet',t:'Apakah menunggu giliran tampil membuat kita lebih sulit mengingat nama?',art:artHyp,b:'<div class="hy"><b>H₀</b><span>Akurasi recall nama peserta pra-tampil tidak lebih rendah daripada pasca-tampil.</span></div><div class="hy h1"><b>H₁</b><span>Peserta pra-tampil memiliki akurasi recall nama yang lebih rendah daripada peserta pasca-tampil.</span></div>'},
+ {n:'08',l:'Desain eksperimen',g:'blue',t:'Urutan tampil menentukan siapa yang harus diingat',art:artDesign,b:'<p>Sepuluh peserta memperkenalkan diri secara tatap muka, bergiliran selama sekitar 30 detik. Mereka tidak diberi tahu bahwa nanti ada tes mengingat nama.</p><div class="vars"><div class="var"><b>Variabel bebas: antisipasi performa</b>Pra-tampil (urutan 6–10) mengingat 4 orang yang tampil tepat sebelum gilirannya. Pasca-tampil (urutan 1–5) mengingat 4 orang yang tampil tepat setelah mereka.</div><div class="var"><b>Variabel terikat: akurasi recall nama</b>Proporsi nama yang diingat tepat sesuai identitasnya.</div></div>'},
+ {n:'09',l:'Partisipan',g:'teal',t:'100 peserta dari berbagai negara di Asia yang belum saling kenal',art:artSample,b:'<p>Penelitian berlangsung lima hari, dua sesi tatap muka per hari. Setiap sesi berisi 10 peserta yang urutannya diundi acak: urutan 1–5 pasca-tampil, urutan 6–10 pra-tampil.</p><div class="crit"><b>Bisa ikut</b><span class="cp ok">Usia 18–25 tahun</span><span class="cp ok">Mampu berbahasa Inggris</span></div><div class="crit"><b>Tidak diikutkan</b><span class="cp no">Sudah saling kenal</span><span class="cp no">Gangguan pendengaran</span><span class="cp no">Kecemasan sosial tinggi</span></div>'},
  {n:'10',l:'Alat ukur',g:'coral',t:'Empat alat untuk menjaga eksperimen tetap adil',art:artTools,b:'<ul class="ul"><li><b>Letter Memory Task</b> memastikan kapasitas dasar memori kerja kedua kelompok setara sebelum perlakuan.</li><li><b>Lembar recall nama</b> mencatat 4 nama target: n−4 sampai n−1 untuk pra-tampil, n+1 sampai n+4 untuk pasca-tampil.</li><li><b>SIAS</b> menyaring calon peserta dengan kecemasan sosial tinggi.</li><li><b>Timer dan kamera</b> menyeragamkan durasi presentasi.</li></ul>'},
  {n:'11',l:'Prosedur',g:'blue',t:'Enam langkah dalam satu sesi tatap muka',art:artFlow,b:'<p>Semua langkah dijalankan dengan naskah dan durasi yang sama untuk setiap sesi, supaya perbedaan hasil benar-benar datang dari urutan tampil.</p>'},
  {n:'12',l:'Simulasi',g:'violet',t:'Sekarang coba jalankan eksperimennya',art:artCTA,b:'<p>Simulasi mengikuti alur yang sama, langkah demi langkah. Kamu bisa mengisi data sendiri, atau langsung melihat contoh hasilnya.</p><div class="row" style="margin-top:6px"><button type="button" class="btn pri big" data-act="mode" data-m="simulasi" id="bOpenSim">Buka simulasi</button><button type="button" class="btn" data-act="demoResult" id="bDemo">Lihat contoh hasil</button></div>'}
@@ -817,9 +836,9 @@ function initState(){const s=sampleSess();return {v:2,mode:'cerita',scene:0,seen
 const save=()=>{try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}};
 const load=()=>{try{const t=localStorage.getItem(LS);return t?JSON.parse(t):null}catch(e){return null}};
 const P=(s,id)=>s.ps.find(p=>p.id===id);
-const cond=pos=>pos<=4?'pasca':'pra';
+const cond=pos=>pos<=5?'pasca':'pra';
 const CN={pra:'Pra-tampil',pasca:'Pasca-tampil'};
-const targets=pos=>pos<=4?[pos+1,pos+2,pos+3,pos+4]:[pos-4,pos-3,pos-2,pos-1];
+const targets=pos=>pos<=5?[pos+1,pos+2,pos+3,pos+4]:[pos-4,pos-3,pos-2,pos-1];
 const posOf=(s,id)=>s.order?s.order.indexOf(id)+1:0;
 const atPos=(s,pos)=>P(s,s.order[pos-1]);
 function status(p){const f=[],m=[],age=num(p.age),si=num(p.sias);
@@ -849,7 +868,7 @@ function typo(nm){const c=[...nm];if(norm(nm).length<=3)return nm;const i=rint(1
 function simScreen(s){s.ps.forEach(p=>{if(num(p.age)==null)p.age=rint(18,25);if(num(p.sias)==null)p.sias=rint(8,30);if(p.lmt==null)p.lmt=+clamp(rnorm(.74,.1),.4,1).toFixed(2)})}
 function simOpen(s){s.check={cam:true,consent:true,rules:true};if(!s.order)s.order=shuffle(s.ps.map(p=>p.id))}
 function simPres(s){simOpen(s);let t=Date.now()-1000*60*7;s.pres=[];for(let i=0;i<10;i++){const d=Math.round(clamp(rnorm(31,4),22,42));s.pres.push({s:t,e:t+d*1000});t+=d*1000+rint(3,6)*1000}s.cur=10;s.recallAt=t+rint(15,30)*1000;s.recall={}}
-function pRec(s,p,pos,k,t,nz){const r=s.pres[t-1],delay=r&&r.e&&s.recallAt?(s.recallAt-r.e)/1000:120;let b=.7+((p.lmt??.74)-.74)*.8-.04*Math.max(0,delay-60)/60+nz;if(pos>4&&S.scen==='efek')b-=[.08,.12,.17,.32][k];return clamp(b,.05,.97)}
+function pRec(s,p,pos,k,t,nz){const r=s.pres[t-1],delay=r&&r.e&&s.recallAt?(s.recallAt-r.e)/1000:120;let b=.7+((p.lmt??.74)-.74)*.8-.04*Math.max(0,delay-60)/60+nz;if(pos>5&&S.scen==='efek')b-=[.08,.12,.17,.32][k];return clamp(b,.05,.97)}
 function simRecall(s){if(!s.order||s.cur<10||!s.recallAt)simPres(s);s.order.forEach((pid,i)=>{if(s.recall[pid])return;const pos=i+1,p=P(s,pid),tg=targets(pos),nz=rnorm(0,.08),o=s.order.filter(id=>id!==pid&&!tg.includes(posOf(s,id))).map(id=>P(s,id).name);
   const v=tg.map((t,k)=>{const nm=atPos(s,t).name;if(Math.random()<pRec(s,p,pos,k,t,nz))return Math.random()<.2?typo(nm):nm;return Math.random()<.6?'':o[rint(0,o.length-1)]});
   if(Math.random()<.08){const a=rint(0,2);[v[a],v[a+1]]=[v[a+1],v[a]]}s.recall[pid]={v,at:s.recallAt}})}
@@ -898,15 +917,15 @@ const selShown=()=>S.step!==2&&S.sess.order&&S.sel&&S.sess.order.includes(S.sel)
 function renderStrip(){const s=S.sess,list=s.order?s.order.map(x=>P(s,x)):s.ps,sel=selShown()?posOf(s,S.sel):0,tg=sel?targets(sel):[],now=S.step===2&&s.order&&s.cur<10?s.cur+1:0;
   $('#seats').innerHTML=list.map((p,i)=>{const pos=s.order?i+1:0;let cls=pos?cond(pos):'',tag='';
     if(pos&&pos===now){cls+=' cur';tag='Tampil'}else if(S.step===2&&pos&&s.pres[i]&&s.pres[i].e)tag=Math.round((s.pres[i].e-s.pres[i].s)/1000)+' dtk';else if(now&&pos===now+1)tag='Berikut';
-    if(sel){if(pos===sel)cls+=' sel';else if(tg.includes(pos)){cls+=' tgt';tag=sel<=4?'n+'+(pos-sel):'n−'+(sel-pos)}else cls+=' dim'}
-    return `${i===4?'<span class="blk" aria-hidden="true"></span>':''}<button type="button" id="seat-${esc(p.id)}" class="seat ${cls}" data-act="pick" data-pid="${esc(p.id)}" aria-label="${esc(p.name)}${pos?', urutan '+pos+', '+CN[cond(pos)]:''}">${face(p.av)}<span class="pos">${pos?'#'+pos:'–'}</span><span class="nm">${esc(p.name)}</span><span class="tag">${esc(tag)}</span></button>`}).join('');
+    if(sel){if(pos===sel)cls+=' sel';else if(tg.includes(pos)){cls+=' tgt';tag=sel<=5?'n+'+(pos-sel):'n−'+(sel-pos)}else cls+=' dim'}
+    return `${i===5?'<span class="blk" aria-hidden="true"></span>':''}<button type="button" id="seat-${esc(p.id)}" class="seat ${cls}" data-act="pick" data-pid="${esc(p.id)}" aria-label="${esc(p.name)}${pos?', urutan '+pos+', '+CN[cond(pos)]:''}">${face(p.av)}<span class="pos">${pos?'#'+pos:'–'}</span><span class="nm">${esc(p.name)}</span><span class="tag">${esc(tag)}</span></button>`}).join('');
   $('#blocks').style.visibility=s.order?'visible':'hidden';
   let note='Klik seorang peserta untuk melihat siapa yang harus ia ingat.';
   if(!s.order)note='Urutan belum diundi.';else if(S.step===2)note='Kuning = sedang tampil.';else if(sel){const p=P(s,S.sel);note=`${p.name} (#${sel}) mengingat urutan ${tg.map(t=>'#'+t).join(', ')}.`}
   $('#stripNote').textContent=note;requestAnimationFrame(drawArcs)}
 function drawArcs(){const svg=$('#arcs'),strip=$('#strip'),s=S.sess;if(!svg||!strip||S.mode!=='simulasi')return;svg.setAttribute('viewBox',`0 0 ${strip.clientWidth} ${strip.clientHeight}`);if(!selShown()){svg.innerHTML='';return}
   const pos=posOf(s,S.sel),r0=strip.getBoundingClientRect(),pt=pid=>{const el=document.getElementById('seat-'+pid);if(!el)return null;const r=el.getBoundingClientRect();return {x:r.left-r0.left+r.width/2,y:r.top-r0.top-3}};const a=pt(S.sel);if(!a){svg.innerHTML='';return}
-  const col=pos<=4?'#3b8de8':'#f2643f';svg.innerHTML=targets(pos).map(t=>{const b=pt(s.order[t-1]);if(!b)return '';const h=Math.min(46,16+Math.abs(b.x-a.x)*.12);return `<path d="M${a.x} ${a.y}C${a.x} ${a.y-h} ${b.x} ${b.y-h} ${b.x} ${b.y}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round"/><circle cx="${b.x}" cy="${b.y}" r="5" fill="${col}" stroke="#fff" stroke-width="2"/>`}).join('')+`<circle cx="${a.x}" cy="${a.y}" r="6" fill="#23253a" stroke="#fff" stroke-width="2"/>`}
+  const col=pos<=5?'#3b8de8':'#f2643f';svg.innerHTML=targets(pos).map(t=>{const b=pt(s.order[t-1]);if(!b)return '';const h=Math.min(46,16+Math.abs(b.x-a.x)*.12);return `<path d="M${a.x} ${a.y}C${a.x} ${a.y-h} ${b.x} ${b.y-h} ${b.x} ${b.y}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round"/><circle cx="${b.x}" cy="${b.y}" r="5" fill="${col}" stroke="#fff" stroke-width="2"/>`}).join('')+`<circle cx="${a.x}" cy="${a.y}" r="6" fill="#23253a" stroke="#fff" stroke-width="2"/>`}
 const fillBtn='<button type="button" class="btn sm" data-act="fill" id="bFill">✦ Isi contoh</button>';
 const phd=(t,p,x=fillBtn)=>`<div class="phd"><div><h2>${t}</h2><p>${p}</p></div><div class="row">${x}</div></div>`;
 const needOrder=h=>h+`<div class="glass card" style="text-align:center"><p>Urutan tampil belum diundi.</p><button type="button" class="btn pri" data-act="step" data-i="1">Ke langkah Pembukaan</button></div>`;
@@ -926,20 +945,20 @@ function pOpen(){const s=S.sess,ck=s.check,started=s.pres.some(r=>r&&r.s),bad=s.
   let right;
   if(!s.order)right=`<div class="drawbox"><p>Urutan tampil diundi acak supaya kondisi tidak ditentukan oleh sifat peserta.</p><button type="button" class="btn pri big" data-act="draw" id="bDraw">✦ Undi urutan</button></div>`;
   else{const L=pos=>{const p=atPos(s,pos);return `<li>${face(p.av)}<span>#${pos} ${esc(p.name)}</span><small>ingat ${targets(pos).map(t=>'#'+t).join(' ')}</small></li>`};
-    right=`<div class="grps"><div class="grp pasca"><h3>Pasca-tampil, urutan 1–4</h3><p>Tampil dulu, lalu menyimak 4 orang berikutnya.</p><ol>${[1,2,3,4].map(L).join('')}</ol></div><div class="grp pra"><h3>Pra-tampil, urutan 5–10</h3><p>Menyimak 4 orang sebelum giliran.</p><ol>${[5,6,7,8,9,10].map(L).join('')}</ol></div></div><div class="row" style="margin-top:14px">${started?'<span class="small mut">Presentasi sudah dimulai, jadi urutan dikunci.</span>':'<button type="button" class="btn" data-act="draw" id="bDraw">Undi ulang</button>'}<button type="button" class="btn pri" data-act="step" data-i="2">Lanjut ke presentasi →</button></div>`}
-  return phd('2. Pembukaan dan undi urutan','Buka sesi tatap muka, lalu undi urutan tampil. Urutan 1–4 menjadi pasca-tampil dan urutan 5–10 pra-tampil.')+(bad.length?`<p class="warn">${bad.length} peserta belum lolos penyaringan: ${bad.map(p=>esc(p.name)).join(', ')}.</p>`:'')+
+    right=`<div class="grps"><div class="grp pasca"><h3>Pasca-tampil, urutan 1–5</h3><p>Tampil dulu, lalu menyimak 4 orang berikutnya.</p><ol>${[1,2,3,4,5].map(L).join('')}</ol></div><div class="grp pra"><h3>Pra-tampil, urutan 6–10</h3><p>Menyimak 4 orang sebelum giliran.</p><ol>${[6,7,8,9,10].map(L).join('')}</ol></div></div><div class="row" style="margin-top:14px">${started?'<span class="small mut">Presentasi sudah dimulai, jadi urutan dikunci.</span>':'<button type="button" class="btn" data-act="draw" id="bDraw">Undi ulang</button>'}<button type="button" class="btn pri" data-act="step" data-i="2">Lanjut ke presentasi →</button></div>`}
+  return phd('2. Pembukaan dan undi urutan','Buka sesi tatap muka, lalu undi urutan tampil. Urutan 1–5 menjadi pasca-tampil dan urutan 6–10 pra-tampil.')+(bad.length?`<p class="warn">${bad.length} peserta belum lolos penyaringan: ${bad.map(p=>esc(p.name)).join(', ')}.</p>`:'')+
   `<div class="cols l"><div class="glass card"><h3>Perkenalan penelitian</h3>${row('cam','Kamera perekam menyala','Merekam semua presentasi')}${row('consent','Informed consent disetujui','Dijelaskan sebelum mulai')}${row('rules','Aturan sesi dijelaskan','Termasuk durasi ±30 detik')}<blockquote class="script">"Welcome, and thank you for coming. Each of you will introduce yourself to the group, one by one, for about 30 seconds."</blockquote><p class="small mut" style="margin:10px 0 0">Jangan sebut bahwa nanti ada tes mengingat nama.</p></div><div class="glass card"><h3>Pembagian kondisi</h3>${right}</div></div>`}
 
 function pPres(){const s=S.sess,h=phd('3. Presentasi','Setiap peserta memperkenalkan diri sekitar 30 detik. Waktu mulai dan selesai tercatat otomatis.');if(!s.order)return needOrder(h);
-  const i=s.cur,q=s.order.map((id,k)=>{const r=s.pres[k],st=r&&r.e?Math.round((r.e-r.s)/1000)+' dtk':k===i&&r&&r.s?'Tampil':'Menunggu';return `${k===4?'<li class="blkh">Blok 2: pra-tampil</li>':''}<li class="${k===i?'now':''}"><span class="pn">#${k+1}</span><span>${esc(P(s,id).name)}</span><i class="dot ${cond(k+1)}"></i><span class="small ${r&&r.e?'':'mut'}">${st}</span></li>`}).join('');
+  const i=s.cur,q=s.order.map((id,k)=>{const r=s.pres[k],st=r&&r.e?Math.round((r.e-r.s)/1000)+' dtk':k===i&&r&&r.s?'Tampil':'Menunggu';return `${k===5?'<li class="blkh">Blok 2: pra-tampil</li>':''}<li class="${k===i?'now':''}"><span class="pn">#${k+1}</span><span>${esc(P(s,id).name)}</span><i class="dot ${cond(k+1)}"></i><span class="small ${r&&r.e?'':'mut'}">${st}</span></li>`}).join('');
   const queue=`<div class="glass card"><h3>Antrean</h3><ol class="queue"><li class="blkh">Blok 1: pasca-tampil</li>${q}</ol></div>`;
   if(i>=10){const d=s.pres.filter(r=>r&&r.e).map(r=>(r.e-r.s)/1000);return h+`<div class="cols"><div class="glass card"><h3>Semua presentasi selesai</h3><p>Rata-rata durasi ${fmt(mean(d),0)} detik. Lanjutkan ke tes ingatan tanpa jeda panjang.</p><div class="row"><button type="button" class="btn pri" data-act="step" data-i="3">Lanjut ke tes ingatan →</button><button type="button" class="btn" data-act="presReset" data-confirm id="bPresReset">Ulangi presentasi</button></div></div>${queue}</div>`}
   const p=atPos(s,i+1),r=s.pres[i],run=r&&r.s&&!r.e,C=2*Math.PI*88;
-  return h+`<div class="cols"><div class="glass card stage2"><div class="who">${face(p.av)}<div style="text-align:left"><span class="pn">Urutan #${i+1}, blok ${i<4?1:2}</span><h3>${esc(p.name)}</h3>${chipc(cond(i+1))}</div></div>
+  return h+`<div class="cols"><div class="glass card stage2"><div class="who">${face(p.av)}<div style="text-align:left"><span class="pn">Urutan #${i+1}, blok ${i<5?1:2}</span><h3>${esc(p.name)}</h3>${chipc(cond(i+1))}</div></div>
   <div class="timer" id="tbox"><svg viewBox="0 0 200 200"><defs><linearGradient id="tgr" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffb39c"/><stop offset="1" stop-color="#b5a4ff"/></linearGradient></defs><circle cx="100" cy="100" r="88" class="trk2"/><circle id="ringp" cx="100" cy="100" r="88" class="prog" stroke-dasharray="${C}" stroke-dashoffset="0" transform="rotate(-90 100 100)"/></svg><div class="tnum" id="tnum">${S.dur}</div><div class="tlab" id="tlab">detik</div></div>
   <div class="row" style="justify-content:center">${run?`<button type="button" class="btn pri big" data-act="presNext" id="bNextP">Selesai${i<9?', lanjut ke #'+(i+2):''}</button>`:`<button type="button" class="btn pri big" data-act="presStart" id="bStart">▶ Mulai ${S.dur} detik</button>`}</div>
   <div class="durs" role="group" aria-label="Durasi timer"><button type="button" class="${S.dur==30?'on':''}" data-act="dur" data-v="30">30 detik</button><button type="button" class="${S.dur==5?'on':''}" data-act="dur" data-v="5">5 detik (demo)</button></div>
-  ${i===4&&!run?'<p class="warn" style="margin:0">Blok 1 selesai. Mulai sekarang yang tampil adalah kelompok pra-tampil.</p>':''}
+  ${i===5&&!run?'<p class="warn" style="margin:0">Blok 1 selesai. Mulai sekarang yang tampil adalah kelompok pra-tampil.</p>':''}
   <blockquote class="script" style="text-align:left;width:100%">"Please introduce yourself in about 30 seconds: your name, where you are from, and one thing you enjoy doing."</blockquote></div>${queue}</div>`}
 
 function pickSel(s,isDone){if(S.sel&&s.order.includes(S.sel))return S.sel;S.sel=s.order.find(id=>!isDone(id))||s.order[0];return S.sel}
